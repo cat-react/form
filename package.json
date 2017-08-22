@@ -5,5 +5,13 @@
   "main": "lib/index.js",
   "repository": "git@github.com:cat-react/form.git",
   "author": "Dominik Sumer <dominik.sumer@catalysts.cc>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint src/**/*"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.5.0",
+    "eslint-plugin-react": "^7.3.0"
+  }
 }
