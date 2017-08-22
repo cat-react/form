@@ -1,0 +1,9 @@
+{
+  "name": "@cat-react/form",
+  "version": "0.0.1",
+  "description": "A simple yet powerful library which helps creating validated forms in react.",
+  "main": "lib/index.js",
+  "repository": "git@github.com:cat-react/form.git",
+  "author": "Dominik Sumer <dominik.sumer@catalysts.cc>",
+  "license": "MIT"
+}
