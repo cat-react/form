@@ -9,7 +9,7 @@ describe('ValidationRule - isRequired', () => {
         let valid = rules.isRequired(null, '');
         expect(valid).toBe(false);
         valid = rules.isRequired(null, null);
-        expect(valid).toBe(true);
+        expect(valid).toBe(false);
         valid = rules.isRequired(null, undefined);
         expect(valid).toBe(false);
     });
