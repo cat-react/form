@@ -5,3 +5,4 @@ install:
     - yarn
 script:
     - yarn run lint
+    - yarn test

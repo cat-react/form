@@ -1,17 +1,22 @@
 {
-  "name": "@cat-react/form",
-  "version": "0.0.1",
-  "description": "A simple yet powerful library which helps creating validated forms in react.",
-  "main": "lib/index.js",
-  "repository": "git@github.com:cat-react/form.git",
-  "author": "Dominik Sumer <dominik.sumer@catalysts.cc>",
-  "license": "MIT",
-  "scripts": {
-    "lint": "./node_modules/.bin/eslint src/**/*"
-  },
-  "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "eslint": "^4.5.0",
-    "eslint-plugin-react": "^7.3.0"
-  }
+    "name": "@cat-react/form",
+    "version": "0.0.1",
+    "description": "A simple yet powerful library which helps creating validated forms in react.",
+    "main": "lib/index.js",
+    "repository": "git@github.com:cat-react/form.git",
+    "author": "Dominik Sumer <dominik.sumer@catalysts.cc>",
+    "license": "MIT",
+    "scripts": {
+        "test": "./node_modules/.bin/jest",
+        "lint": "./node_modules/.bin/eslint src/**/*"
+    },
+    "devDependencies": {
+        "babel-eslint": "^7.2.3",
+        "babel-jest": "^20.0.3",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "eslint": "^4.5.0",
+        "eslint-plugin-react": "^7.3.0",
+        "jest": "^20.0.4"
+    }
 }
