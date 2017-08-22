@@ -3,6 +3,8 @@ node_js: "lts/*"
 cache: yarn
 install:
     - yarn
+    - yarn global add codecov
 script:
     - yarn run lint
-    - yarn test
+    - yarn test -- --coverage
+    - codecov
