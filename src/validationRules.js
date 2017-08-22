@@ -26,4 +26,6 @@ const rules = {
 rules.equalsField.createsDependencies = true;
 rules.equalsFields.createsDependencies = true;
 
+var test = "";
+
 export default rules;
