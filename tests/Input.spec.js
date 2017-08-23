@@ -6,19 +6,25 @@ import Input from '../src/Input';
 class CustomInput extends React.Component {
 }
 
+let formContext = {
+    context: {
+        _reactForm: {
+            attach: jest.fn()
+        }
+    }
+};
+
 describe('Input', () => {
     it('should render correctly', () => {
-        let formContext = {
-            attach: jest.fn()
-        };
+        let wrapper = shallow(<CustomInput name="email" className="myInput"/>, formContext);
 
-        let wrapper = shallow(<CustomInput name="email" className="myInput"/>, {
-            context: {
-                _reactForm: formContext
-            }
-        });
-        
         expect(wrapper.is('.myInput')).toBe(true);
-        expect(formContext.attach).toBeCalledWith(wrapper.instance());
+        expect(formContext.context._reactForm.attach).toBeCalledWith(wrapper.instance());
     });
+
+    it('should register all given dependencies', () => {
+        let wrapper = shallow(<CustomInput name="email" dependencies={['email2']}/>, formContext);
+
+        expect(wrapper.instance().dependencies).toEqual(['email2']);
+    })
 });
