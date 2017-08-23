@@ -45,4 +45,10 @@ describe('Input', () => {
 
         expect(wrapper.instance().dependencies).toEqual(['email2', 'email3', 'email4', 'email5']);
     });
+
+    it('should fail when registering a dependency with the same name', () => {
+        let wrapper = shallow(<CustomInput name="email"/>, formContext);
+
+        expect(wrapper.instance().addDependency.bind(null, 'email')).toThrow('An input cannot have itself as an dependency. Check your validation rules.');
+    });
 });
