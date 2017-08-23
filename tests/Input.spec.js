@@ -95,4 +95,38 @@ describe('Input', () => {
 
         await expect(wrapper.instance().validate()).resolves.toBe(true);
     });
+
+    it('should invalidate the input', async () => {
+        let wrapper = shallow(<CustomInput name="email" dependencies={['email2']}
+                                           validations={{
+                                               isRequired: true
+                                           }}/>, formContext);
+
+        await expect(wrapper.instance().validate()).resolves.toBe(false);
+        expect(wrapper.instance().getErrorMessages()).toEqual([]);
+    });
+
+    it('should invalidate the inputand show the error messages', async () => {
+        let wrapper = shallow(<CustomInput name="email" dependencies={['email2']}
+                                           validations={{
+                                               isRequired: true
+                                           }}
+                                           validationErrors={{
+                                               isRequired: 'the input is required'
+                                           }}/>, formContext);
+
+        await expect(wrapper.instance().validate()).resolves.toBe(false);
+        expect(wrapper.instance().getErrorMessages()).toEqual(['the input is required']);
+    });
+
+    it('should validate the input with a custom validator', async () => {
+        let wrapper = shallow(<CustomInput name="email" dependencies={['email2']} value="itsMyValue"
+                                           validations={{
+                                               myValidator: function (values, value) {
+                                                   return value === "itsMyValue";
+                                               }
+                                           }}/>, formContext);
+
+        await expect(wrapper.instance().validate()).resolves.toBe(true);
+    });
 });
