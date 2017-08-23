@@ -123,7 +123,7 @@ export default function (WrappedComponent) {
                     if (!valid) {
                         allValid = false;
 
-                        if (this.props.validationErrors[ruleName]) {
+                        if (this.props.validationErrors && this.props.validationErrors[ruleName]) {
                             // TODO: add support for arguments, maybe even different errormessages per validator?
                             errors.push(this.props.validationErrors[ruleName]);
                         }

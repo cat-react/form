@@ -6,12 +6,16 @@ import Input from '../src/Input';
 class CustomInput extends React.Component {
 }
 
+let mockValues = {};
 let formContext = {
     context: {
         _reactForm: {
             attach: jest.fn(),
             detach: jest.fn(),
-            validate: jest.fn()
+            validate: jest.fn(),
+            getValues: function () {
+                return mockValues;
+            }
         }
     }
 };
@@ -81,5 +85,14 @@ describe('Input', () => {
         let wrapper = shallow(<CustomInput name="email"/>, formContext);
 
         expect(wrapper.instance().addDependency.bind(null, 'email')).toThrow('An input cannot have itself as an dependency. Check your validation rules.');
+    });
+
+    it('should validate the input successfully', async () => {
+        let wrapper = shallow(<CustomInput name="email" dependencies={['email2']} value="abc"
+                                           validations={{
+                                               isRequired: true
+                                           }}/>, formContext);
+
+        await expect(wrapper.instance().validate()).resolves.toBe(true);
     });
 });
