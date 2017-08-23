@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 import Form from '../src/Form';
 
 describe('Form', () => {
@@ -23,17 +23,36 @@ describe('Form', () => {
         wrapper.unmount();
     });
 
-    it('should submit successfully', () => {
+    it('should submit successfully and call all events', () => {
         const onSubmit = jest.fn();
         const onValidSubmit = jest.fn();
         const onInvalidSubmit = jest.fn();
+        const onValid = jest.fn();
+        const onInvalid = jest.fn();
         let wrapper = mount(<Form className="myForm"
                                   onSubmit={onSubmit}
                                   onValidSubmit={onValidSubmit}
-                                  onInvalidSubmit={onInvalidSubmit}><button type="submit" /></Form>);
+                                  onInvalidSubmit={onInvalidSubmit}
+                                  onValid={onValid}
+                                  onInvalid={onInvalid}>
+            <button type="submit"/>
+        </Form>);
         wrapper.find('button').get(0).click();
         expect(onSubmit).toHaveBeenCalledTimes(1);
+        expect(onSubmit).toHaveBeenCalledWith({});
         expect(onValidSubmit).toHaveBeenCalledTimes(1);
+        expect(onValidSubmit).toHaveBeenCalledWith({});
         expect(onInvalidSubmit).not.toBeCalled();
+        expect(onInvalid).toHaveBeenCalledTimes(1);
+        expect(onInvalid).toHaveBeenCalledWith({}, false);
+        expect(onValid).toHaveBeenCalledTimes(1);
+        expect(onValid).toHaveBeenCalledWith({});
+    });
+
+    it('should submit without triggering the events', () => {
+        let wrapper = mount(<Form className="myForm">
+            <button type="submit"/>
+        </Form>);
+        wrapper.find('button').get(0).click();
     });
 });
