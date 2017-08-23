@@ -1,5 +1,5 @@
 # [@cat-react](https://github.com/cat-react) / form ![Build Status](https://travis-ci.org/cat-react/form.svg?branch=master) [![codecov](https://codecov.io/gh/cat-react/form/branch/master/graph/badge.svg)](https://codecov.io/gh/cat-react/form)
-A simple yet powerful library which helps creating validated forms in react.
+A simple yet powerful library which helps creating validated forms in react. This project is inspired by [formsy-react](https://github.com/christianalfoni/formsy-react).
 
 ## Getting Started
 Are you looking for a simple way to create validated forms with React?
