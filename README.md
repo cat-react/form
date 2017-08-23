@@ -3,9 +3,10 @@ A simple yet powerful library which helps creating validated forms in react. Thi
 
 ## Getting Started
 Are you looking for a simple way to create validated forms with React?
+
 Congratulations! Your search is over, because **`@cat-react/form`** offers you a simple way to create either frontend- or backend-validated forms.
 
-## Installation 
+## Installation
 
 ## Contribution
 The project requires at least the latest stable version of node and npm. You also need to have yarn installed globally.
