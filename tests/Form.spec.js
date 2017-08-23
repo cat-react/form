@@ -1,6 +1,14 @@
 import React from 'react';
 import {mount, shallow} from 'enzyme';
 import Form from '../src/Form';
+import Input from '../src/Input';
+
+@Input
+class CustomInput extends React.Component {
+    render() {
+        return <div/>;
+    }
+}
 
 describe('Form', () => {
     it('should render correctly', () => {
@@ -54,5 +62,24 @@ describe('Form', () => {
             <button type="submit"/>
         </Form>);
         wrapper.find('button').get(0).click();
+    });
+
+    it('should attach the input', (done) => {
+        const expectedValues = {email: 'abc', email2: 'jmc'};
+        const onInvalid = jest.fn();
+        const onValid = function (values) {
+            expect(onInvalid).toHaveBeenCalledTimes(1);
+            expect(onInvalid).toHaveBeenCalledWith(expectedValues, true);
+            expect(values).toEqual(expectedValues);
+            done();
+        };
+        let wrapper = mount(<Form className="myForm"
+                                  onValid={onValid}
+                                  onInvalid={onInvalid}>
+            <CustomInput name="email" value="abc"/>
+            <CustomInput name="email2" value="jmc"/>
+        </Form>);
+        expect(wrapper.instance().inputs[0].getName()).toEqual('email');
+        expect(wrapper.instance().inputs[1].getName()).toEqual('email2');
     });
 });
