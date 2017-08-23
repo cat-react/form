@@ -22,4 +22,18 @@ describe('Form', () => {
         expect(wrapper.instance().initialized).toBe(true);
         wrapper.unmount();
     });
+
+    it('should submit successfully', () => {
+        const onSubmit = jest.fn();
+        const onValidSubmit = jest.fn();
+        const onInvalidSubmit = jest.fn();
+        let wrapper = mount(<Form className="myForm"
+                                  onSubmit={onSubmit}
+                                  onValidSubmit={onValidSubmit}
+                                  onInvalidSubmit={onInvalidSubmit}><button type="submit" /></Form>);
+        wrapper.find('button').get(0).click();
+        expect(onSubmit).toHaveBeenCalledTimes(1);
+        expect(onValidSubmit).toHaveBeenCalledTimes(1);
+        expect(onInvalidSubmit).not.toBeCalled();
+    });
 });

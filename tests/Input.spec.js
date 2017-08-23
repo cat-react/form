@@ -94,6 +94,7 @@ describe('Input', () => {
                                            }}/>, formContext);
 
         await expect(wrapper.instance().validate()).resolves.toBe(true);
+        expect(wrapper.instance().isValid()).toBe(true);
     });
 
     it('should invalidate the input', async () => {
