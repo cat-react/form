@@ -7,8 +7,8 @@ export default class Form extends React.Component {
     static validationRules = Object.assign({}, validationRules);
 
     static addValidationRule(name, func, createsDependencies) {
-        validationRules[name] = func;
-        validationRules[name].createsDependencies = createsDependencies;
+        this.validationRules[name] = func;
+        this.validationRules[name].createsDependencies = createsDependencies;
     }
 
     constructor(props) {
