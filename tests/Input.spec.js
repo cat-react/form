@@ -23,6 +23,23 @@ describe('Input', () => {
         expect(formContext.context._reactForm.attach).toBeCalledWith(wrapper.instance());
     });
 
+    it('should receive the right props & state', () => {
+        let wrapper = shallow(<CustomInput name="email" className="myInput" value="myValue"/>, formContext);
+
+        const instance = wrapper.instance();
+        expect(formContext.context._reactForm.attach).toBeCalledWith(instance);
+        expect(instance.getName()).toBe('email');
+        expect(instance.hasName('abc')).toBe(false);
+        expect(instance.hasName('email')).toBe(true);
+        expect(instance.isRequired()).toBe(false);
+        expect(instance.isPristine()).toBe(true);
+        expect(instance.isValid()).toBe(false);
+        expect(instance.getValue()).toBe('myValue');
+
+        wrapper.setProps({validations: {isRequired: true}});
+        expect(instance.isRequired()).toBe(true);
+    });
+
     it('should unmount correctly', () => {
         let wrapper = shallow(<CustomInput name="email" className="myInput"/>, formContext);
         const instance = wrapper.instance();
