@@ -112,39 +112,21 @@ export default function (WrappedComponent) {
             });
         }
 
-        getValidationRules() {
-            let validationRules = [];
-            for (let name in this.props.validations) {
-                const conditions = this.props.validations[name];
-                if (conditions) {
-                    validationRules.push([name, conditions]);
-                }
-            }
-            return validationRules;
-        }
-
         async runValidationRules(resolve) {
             let errors = [];
-            const validationRules = this.getValidationRules();
 
-            const availableRules = Form.validationRules;
             let allValid = true;
-            for (let validationRule of validationRules) {
-                const ruleName = validationRule[0];
-                const ruleConditions = validationRule[1];
-                let valid = true;
-                if (availableRules[ruleName]) {
-                    valid = await availableRules[ruleName](this.context._reactForm.getValues(), this.getValue(), ruleConditions);
-                } else if (typeof ruleConditions === 'function') {
-                    valid = await ruleConditions(this.context._reactForm.getValues(), this.getValue());
-                }
+            for (let ruleName in this.props.validations) {
+                const ruleConditions = this.props.validations[ruleName];
+                if (ruleConditions) { // only execute validations if the ruleConditions are valid
+                    const valid = await this.runValidationRule(ruleName);
+                    if (!valid) {
+                        allValid = false;
 
-                if (!valid) {
-                    allValid = false;
-
-                    if (this.props.validationErrors[ruleName]) {
-                        // TODO: add support for arguments, maybe even different errormessages per validator?
-                        errors.push(this.props.validationErrors[ruleName]);
+                        if (this.props.validationErrors[ruleName]) {
+                            // TODO: add support for arguments, maybe even different errormessages per validator?
+                            errors.push(this.props.validationErrors[ruleName]);
+                        }
                     }
                 }
             }
@@ -155,6 +137,19 @@ export default function (WrappedComponent) {
             }, () => {
                 resolve(allValid);
             });
+        }
+
+        async runValidationRule(ruleName) {
+            const ruleConditions = this.props.validations[ruleName];
+
+            let valid = true;
+            if (Form.validationRules[ruleName]) {
+                valid = await Form.validationRules[ruleName](this.context._reactForm.getValues(), this.getValue(), ruleConditions);
+            } else if (typeof ruleConditions === 'function') {
+                valid = await ruleConditions(this.context._reactForm.getValues(), this.getValue());
+            }
+
+            return valid;
         }
 
         render() {
