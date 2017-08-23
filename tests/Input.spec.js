@@ -10,7 +10,8 @@ let formContext = {
     context: {
         _reactForm: {
             attach: jest.fn(),
-            detach: jest.fn()
+            detach: jest.fn(),
+            validate: jest.fn()
         }
     }
 };
@@ -24,7 +25,7 @@ describe('Input', () => {
     });
 
     it('should receive the right props & state', () => {
-        let wrapper = shallow(<CustomInput name="email" className="myInput" value="myValue"/>, formContext);
+        let wrapper = shallow(<CustomInput name="email" value="myValue"/>, formContext);
 
         const instance = wrapper.instance();
         expect(formContext.context._reactForm.attach).toBeCalledWith(instance);
@@ -35,9 +36,18 @@ describe('Input', () => {
         expect(instance.isPristine()).toBe(true);
         expect(instance.isValid()).toBe(false);
         expect(instance.getValue()).toBe('myValue');
+        expect(instance.getErrorMessages().length).toBe(0);
 
         wrapper.setProps({validations: {isRequired: true}});
         expect(instance.isRequired()).toBe(true);
+    });
+
+    it('should change the value correctly', () => {
+        let wrapper = shallow(<CustomInput name="email" value="myValue2"/>, formContext);
+        wrapper.instance().setValue('myValue3');
+        wrapper.update();
+        expect(wrapper.instance().getValue()).toBe('myValue3');
+        expect(formContext.context._reactForm.validate).toBeCalledWith(wrapper.instance());
     });
 
     it('should unmount correctly', () => {
