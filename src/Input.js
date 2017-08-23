@@ -63,7 +63,7 @@ export default function (WrappedComponent) {
         }
 
         isRequired() {
-            return this.props.validations.isRequired;
+            return !!(this.props.validations && this.props.validations.isRequired);
         }
 
         isPristine() {
