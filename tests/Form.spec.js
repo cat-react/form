@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import Form from '../src/Form';
 
 describe('Form', () => {
@@ -15,5 +15,11 @@ describe('Form', () => {
         }, false);
         expect(Form.validationRules.testRule(null, 'abc')).toBe(true);
         expect(Form.validationRules.testRule(null, 'ac')).toBe(false);
+    });
+
+    it('should mount and unmount correctly', () => {
+        let wrapper = mount(<Form className="myForm"><span className="abc">abc</span></Form>);
+        expect(wrapper.instance().initialized).toBe(true);
+        wrapper.unmount();
     });
 });
