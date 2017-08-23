@@ -17,7 +17,7 @@ export default class Form extends React.Component {
         this.initialized = false;
         this.inputs = [];
         this.valid = false;
-        this.validatingInputs = [];
+        this.validationQueue = [];
 
         autoBind(this);
     }
@@ -72,7 +72,7 @@ export default class Form extends React.Component {
     }
 
     isValidating() {
-        return this.validatingInputs.length > 0;
+        return this.validationQueue.length > 0;
     }
 
     isValid() {
@@ -97,11 +97,11 @@ export default class Form extends React.Component {
     }
 
     addValidatingInput(input) {
-        if (this.validatingInputs.indexOf(input.getName()) > -1) {
+        if (this.validationQueue.indexOf(input.getName()) > -1) {
             return;
         }
 
-        this.validatingInputs.push(input.getName());
+        this.validationQueue.push(input.getName());
         const dependentInputs = this.inputs.filter((depInput) => depInput.dependencies.indexOf(input.getName()) > -1);
         for (let dependency of dependentInputs) {
             this.addValidatingInput(dependency);
@@ -126,8 +126,8 @@ export default class Form extends React.Component {
     }
 
     async startValidation() {
-        if (this.validatingInputs.length > 0) {
-            const validatingInputName = this.validatingInputs.splice(0, 1)[0];
+        if (this.validationQueue.length > 0) {
+            const validatingInputName = this.validationQueue.splice(0, 1)[0];
             const validatingInput = this.inputs.find((input) => input.hasName(validatingInputName));
             if (validatingInput) {
                 await validatingInput.validate();
