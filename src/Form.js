@@ -87,7 +87,7 @@ export default class Form extends React.Component {
         if (this.initialized) {
             this.validateInput(newInput);
         } else {
-            this.addValidatingInput(newInput);
+            this.addToValidationQueue(newInput);
         }
     }
 
@@ -96,7 +96,7 @@ export default class Form extends React.Component {
         this.validate();
     }
 
-    addValidatingInput(input) {
+    addToValidationQueue(input) {
         if (this.validationQueue.indexOf(input.getName()) > -1) {
             return;
         }
@@ -104,14 +104,14 @@ export default class Form extends React.Component {
         this.validationQueue.push(input.getName());
         const dependentInputs = this.inputs.filter((depInput) => depInput.dependencies.indexOf(input.getName()) > -1);
         for (let dependency of dependentInputs) {
-            this.addValidatingInput(dependency);
+            this.addToValidationQueue(dependency);
         }
         this.valid = false;
     }
 
     validate() {
         for (let input of this.inputs) {
-            this.addValidatingInput(input);
+            this.addToValidationQueue(input);
         }
         this.onInvalid();
 
@@ -119,7 +119,7 @@ export default class Form extends React.Component {
     }
 
     validateInput(input) {
-        this.addValidatingInput(input);
+        this.addToValidationQueue(input);
         this.onInvalid();
 
         this.startValidation();
@@ -127,10 +127,10 @@ export default class Form extends React.Component {
 
     async startValidation() {
         if (this.validationQueue.length > 0) {
-            const validatingInputName = this.validationQueue.splice(0, 1)[0];
-            const validatingInput = this.inputs.find((input) => input.hasName(validatingInputName));
-            if (validatingInput) {
-                await validatingInput.validate();
+            const nextInputName = this.validationQueue.splice(0, 1)[0];
+            const nextInput = this.inputs.find((input) => input.hasName(nextInputName));
+            if (nextInput) {
+                await nextInput.validate();
             }
             this.startValidation();
         } else {
