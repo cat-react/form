@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import autoBind from "auto-bind";
-import validationRules from "./validationRules";
+import React from 'react';
+import PropTypes from 'prop-types';
+import autoBind from 'auto-bind';
+import validationRules from './validationRules';
 
 export default class Form extends React.Component {
     static validationRules = Object.assign({}, validationRules);
@@ -128,9 +128,9 @@ export default class Form extends React.Component {
     async startValidation() {
         if (this.validatingInputs.length > 0) {
             const validatingInputName = this.validatingInputs.splice(0, 1)[0];
-            const input = this.inputs.find((input) => input.hasName(validatingInputName));
-            if (input) {
-                await input.validate();
+            const validatingInput = this.inputs.find((input) => input.hasName(validatingInputName));
+            if (validatingInput) {
+                await validatingInput.validate();
             }
             this.startValidation();
         } else {
