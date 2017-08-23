@@ -114,4 +114,15 @@ describe('Form', () => {
         expect(onInvalidSubmit).toHaveBeenCalledTimes(1);
         expect(onInvalidSubmit).toHaveBeenCalledWith(expectedValues);
     });
+
+    it('should fail because of adding two inputs with the same name', () => {
+        let wrapper = mount(<Form className="myForm">
+            <CustomInput name="email" value=""/>
+        </Form>);
+        expect(wrapper.instance().attachInput.bind(null, {
+            getName: function () {
+                return 'email';
+            }
+        })).toThrow('There already exists an input with the name "email"');
+    });
 });
