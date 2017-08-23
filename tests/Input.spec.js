@@ -26,5 +26,15 @@ describe('Input', () => {
         let wrapper = shallow(<CustomInput name="email" dependencies={['email2']}/>, formContext);
 
         expect(wrapper.instance().dependencies).toEqual(['email2']);
-    })
+    });
+
+    it('should register all validationRule dependencies', () => {
+        let wrapper = shallow(<CustomInput name="email" dependencies={['email2']}
+                                           validations={{
+                                               equalsField: 'email3',
+                                               equalsFields: ['email4', 'email5']
+                                           }}/>, formContext);
+
+        expect(wrapper.instance().dependencies).toEqual(['email2', 'email3', 'email4', 'email5']);
+    });
 });
