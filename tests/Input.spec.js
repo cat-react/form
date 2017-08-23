@@ -9,7 +9,8 @@ class CustomInput extends React.Component {
 let formContext = {
     context: {
         _reactForm: {
-            attach: jest.fn()
+            attach: jest.fn(),
+            detach: jest.fn()
         }
     }
 };
@@ -20,6 +21,13 @@ describe('Input', () => {
 
         expect(wrapper.is('.myInput')).toBe(true);
         expect(formContext.context._reactForm.attach).toBeCalledWith(wrapper.instance());
+    });
+
+    it('should unmount correctly', () => {
+        let wrapper = shallow(<CustomInput name="email" className="myInput"/>, formContext);
+        const instance = wrapper.instance();
+        wrapper.unmount();
+        expect(formContext.context._reactForm.detach).toBeCalledWith(instance);
     });
 
     it('should register all given dependencies', () => {
