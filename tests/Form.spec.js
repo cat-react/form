@@ -10,6 +10,29 @@ class CustomInput extends React.Component {
     }
 }
 
+class SpecialForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showInput: false
+        };
+    }
+
+    render() {
+        let input = null;
+        if (this.state.showInput) {
+            input = <CustomInput name="email" value="" validations={{isRequired: true}}/>;
+        }
+
+        return (
+            <Form {...this.props}>
+                <CustomInput name="email2" value=""/>
+                {input}
+            </Form>
+        );
+    }
+}
+
 describe('Form', () => {
     it('should render correctly', () => {
         let wrapper = shallow(<Form className="myForm"><span className="abc">abc</span></Form>);
@@ -105,8 +128,8 @@ describe('Form', () => {
                                   onInvalidSubmit={onInvalidSubmit}
                                   onValid={onValid}
                                   onInvalid={onInvalid}>
-            <CustomInput name="email" value=""/>
             <CustomInput name="email_confirm" value="as" validations={{equalsField: 'email'}}/>
+            <CustomInput name="email" value=""/>
             <button type="submit"/>
         </Form>);
         wrapper.find('button').get(0).click();
@@ -124,5 +147,31 @@ describe('Form', () => {
                 return 'email';
             }
         })).toThrow('There already exists an input with the name "email"');
+    });
+
+    it('should attach and detach the input correctly', (done) => {
+        let wrapper;
+        let onValidCalled = false;
+        let onInvalidated = false;
+        let onValid = function() {
+            onValidCalled = true;
+            if (onInvalidated) {
+                done();
+            } else {
+                wrapper.setState({
+                    showInput: true
+                });
+            }
+        };
+        let onInvalid = function(values, validating) {
+            if (!validating) {
+                onInvalidated = true;
+                expect(onValidCalled).toBe(true);
+                wrapper.setState({
+                    showInput: false
+                });
+            }
+        };
+        wrapper = mount(<SpecialForm onValid={onValid} onInvalid={onInvalid}/>);
     });
 });
