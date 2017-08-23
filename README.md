@@ -6,7 +6,7 @@ Are you looking for a simple way to create validated forms with React?
 
 Congratulations! Your search is over, because **`@cat-react/form`** offers you a simple way to create either frontend- or backend-validated forms.
 
-```js
+```jsx
 <Form>
     <MyInput name="email"
              validations={{
@@ -17,6 +17,10 @@ Congratulations! Your search is over, because **`@cat-react/form`** offers you a
              validations={{
                  isRequired: true,
                  equalsField: 'email'
+             }}
+             validationErrors={{
+                 isRequired: 'Please confirm your email address.',
+                 equalsField: 'The email addresses do not match each other.'
              }}/>
 </Form>
 ```
