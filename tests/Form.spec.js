@@ -82,4 +82,35 @@ describe('Form', () => {
         expect(wrapper.instance().inputs[0].getName()).toEqual('email');
         expect(wrapper.instance().inputs[1].getName()).toEqual('email2');
     });
+
+    it('should invalidate the form', (done) => {
+        const expectedValues = {email: ''};
+        const onValidSubmit = jest.fn();
+        const onInvalidSubmit = jest.fn();
+        const onValid = jest.fn();
+        let count = 0;
+        const onInvalid = function (values, validating) {
+            expect(values).toEqual(expectedValues);
+            if (count === 0) {
+                expect(validating).toBe(true);
+                count++;
+            } else {
+                expect(validating).toBe(false);
+                expect(onValid).not.toHaveBeenCalled();
+                done();
+            }
+        };
+        let wrapper = mount(<Form className="myForm"
+                                  onValidSubmit={onValidSubmit}
+                                  onInvalidSubmit={onInvalidSubmit}
+                                  onValid={onValid}
+                                  onInvalid={onInvalid}>
+            <CustomInput name="email" value="" validations={{isRequired: true}}/>
+            <button type="submit"/>
+        </Form>);
+        wrapper.find('button').get(0).click();
+        expect(onValidSubmit).not.toHaveBeenCalled();
+        expect(onInvalidSubmit).toHaveBeenCalledTimes(1);
+        expect(onInvalidSubmit).toHaveBeenCalledWith(expectedValues);
+    });
 });
