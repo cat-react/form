@@ -84,7 +84,7 @@ describe('Form', () => {
     });
 
     it('should invalidate the form', (done) => {
-        const expectedValues = {email: ''};
+        const expectedValues = {email: '', email_confirm: 'as'};
         const onValidSubmit = jest.fn();
         const onInvalidSubmit = jest.fn();
         const onValid = jest.fn();
@@ -105,7 +105,8 @@ describe('Form', () => {
                                   onInvalidSubmit={onInvalidSubmit}
                                   onValid={onValid}
                                   onInvalid={onInvalid}>
-            <CustomInput name="email" value="" validations={{isRequired: true}}/>
+            <CustomInput name="email" value=""/>
+            <CustomInput name="email_confirm" value="as" validations={{equalsField: 'email'}}/>
             <button type="submit"/>
         </Form>);
         wrapper.find('button').get(0).click();
