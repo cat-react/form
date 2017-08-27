@@ -7,7 +7,7 @@ module.exports = {
     entry: fs.readdirSync(__dirname).reduce(function (entries, dir) {
         const isDir = fs.lstatSync(path.join(__dirname, dir)).isDirectory();
 
-        if (isDir) {
+        if (isDir && dir !== 'components') {
             entries[dir] = path.join(__dirname, dir, 'app.js');
         }
 
@@ -26,7 +26,8 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015', 'react']
+                    presets: ['es2015', 'react', 'stage-0'],
+                    plugins: ['transform-runtime', 'transform-class-properties', 'transform-decorators-legacy']
                 }
             }
         ]
