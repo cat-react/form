@@ -9,7 +9,8 @@
     "scripts": {
         "test": "./node_modules/.bin/jest",
         "lint": "./node_modules/.bin/eslint src/**/*",
-        "examples": "./node_modules/.bin/webpack-dev-server --config examples/webpack.config.js --content-base examples --open --hot"
+        "examples": "./node_modules/.bin/webpack-dev-server --config examples/webpack.config.js --content-base examples --open --hot",
+        "build_examples": "./node_modules/.bin/webpack --config examples/webpack.config.js && cp examples/index.html examples/build/ && ./node_modules/.bin/replace-in-file //build//g \"\" examples/build/index.html --isRegex"
     },
     "dependencies": {
         "auto-bind": "^1.1.0",
@@ -35,6 +36,7 @@
         "react-dom": "^15.6.1",
         "react-router-dom": "^4.2.2",
         "react-test-renderer": "^15.6.1",
+        "replace-in-file": "^2.6.3",
         "style-loader": "^0.18.2",
         "url-loader": "^0.5.9",
         "webpack": "^3.5.5",

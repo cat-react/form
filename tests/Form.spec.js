@@ -70,7 +70,7 @@ describe('Form', () => {
         </Form>);
         wrapper.find('button').get(0).click();
         expect(onSubmit).toHaveBeenCalledTimes(1);
-        expect(onSubmit).toHaveBeenCalledWith({});
+        expect(onSubmit).toHaveBeenCalledWith({}, true);
         expect(onValidSubmit).toHaveBeenCalledTimes(1);
         expect(onValidSubmit).toHaveBeenCalledWith({});
         expect(onInvalidSubmit).not.toBeCalled();

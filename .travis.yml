@@ -8,3 +8,10 @@ script:
     - yarn run lint
     - yarn test -- --coverage
     - codecov
+    - yarn run build_examples
+deploy:
+    provider: pages
+    skip_cleanup: true
+    local_dir: examples/build/
+    on:
+        branch: master
