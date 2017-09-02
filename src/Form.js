@@ -46,11 +46,16 @@ export default class Form extends React.Component {
     onSubmit(event) {
         event.preventDefault();
 
-        if (this.props.onSubmit) {
-            this.props.onSubmit(this.getValues());
+        for (let input of this.inputs) {
+            input.touch();
         }
 
-        if (this.isValid()) {
+        const valid = this.isValid();
+        if (this.props.onSubmit) {
+            this.props.onSubmit(this.getValues(), valid);
+        }
+
+        if (valid) {
             this.onValidSubmit();
         } else {
             this.onInvalidSubmit();

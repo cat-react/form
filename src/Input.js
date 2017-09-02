@@ -98,7 +98,7 @@ export default function (WrappedComponent) {
             return this.state.errors;
         }
 
-        onBlur() {
+        touch() {
             if (this.isPristine()) {
                 this.setState({
                     pristine: false
@@ -160,7 +160,7 @@ export default function (WrappedComponent) {
                 getValue: this.getValue,
                 setValue: this.setValue,
                 getErrorMessages: this.getErrorMessages,
-                onBlur: this.onBlur,
+                onBlur: this.touch,
                 ...this.props
             };
 
