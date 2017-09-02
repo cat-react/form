@@ -4,15 +4,9 @@ var webpack = require('webpack');
 
 module.exports = {
     devtool: 'inline-source-map',
-    entry: fs.readdirSync(__dirname).reduce(function (entries, dir) {
-        const isDir = fs.lstatSync(path.join(__dirname, dir)).isDirectory();
-
-        if (isDir && dir !== 'components') {
-            entries[dir] = path.join(__dirname, dir, 'app.js');
-        }
-
-        return entries;
-    }, {}),
+    entry: {
+        index: './examples/index.js'
+    },
     output: {
         path: path.join(__dirname, 'build'),
         filename: '[name].js',
