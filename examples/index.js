@@ -1,23 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter, Switch, Route, Link} from 'react-router-dom';
+import {HashRouter, Link, Route, Switch} from 'react-router-dom';
 
 import Home from './Home';
 import Login from './Login';
+
+const menuEntries = [
+    {
+        exact: true,
+        path: '/',
+        component: Home,
+        text: 'Home'
+    },
+    {
+        path: '/login',
+        component: Login,
+        text: 'Login'
+    }
+];
 
 ReactDOM.render(
     <HashRouter>
         <div>
             <nav>
                 <ul>
-                    <li><Link to='/'>Home</Link></li>
-                    <li><Link to='/login'>Login</Link></li>
+                    {menuEntries.map((entry, index) => {
+                        let replace = entry.path === window.location.hash.replace('#', '');
+                        return <li key={index}><Link to={entry.path} replace={replace}>{entry.text}</Link></li>;
+                    })}
                 </ul>
             </nav>
             <main>
                 <Switch>
-                    <Route exact path='/' component={Home}/>
-                    <Route path='/login' component={Login}/>
+                    {menuEntries.map((entry, index) => {
+                        return <Route key={index} exact={!!entry.exact} path={entry.path} component={entry.component}/>;
+                    })}
                 </Switch>
             </main>
         </div>
