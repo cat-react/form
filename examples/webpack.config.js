@@ -23,6 +23,12 @@ module.exports = {
                     presets: ['es2015', 'react', 'stage-0'],
                     plugins: ['transform-runtime', 'transform-class-properties', 'transform-decorators-legacy']
                 }
+            }, {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }, {
+                test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+                loader: 'url-loader'
             }
         ]
     },
