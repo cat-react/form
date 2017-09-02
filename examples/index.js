@@ -19,7 +19,8 @@ const menuEntries = [
     {
         path: '/login',
         component: Login,
-        text: 'Login'
+        text: 'Login',
+        description: ' (Dynamic submit button)'
     },
     {
         path: '/registration',
@@ -36,13 +37,15 @@ class App extends React.Component {
             <div>
                 <div className="col-md-2 sidebar">
                     <div className="list-group">
-                    <span className="list-group-item">
-                        <a href="https://github.com/cat-react/form"><b>@cat-react/form</b></a> Examples
-                    </span>
+                        <span className="list-group-item">
+                            <a href="https://github.com/cat-react/form"><b>@cat-react/form</b></a> Examples
+                        </span>
                         {menuEntries.map((entry, index) => {
                             const replace = entry.path === window.location.hash.replace('#', '');
-                            return <Link key={index} className="list-group-item nav-link" to={entry.path}
-                                         replace={replace}>{entry.text}</Link>;
+                            return <span key={index} className="list-group-item">
+                                <Link className="nav-link" to={entry.path} replace={replace}>{entry.text}</Link>
+                                {entry.description}
+                            </span>;
                         })}
                     </div>
                 </div>
