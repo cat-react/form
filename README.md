@@ -6,6 +6,8 @@ Are you looking for a simple way to create validated forms with React?
 
 Congratulations! Your search is over, because **`@cat-react/form`** offers you a simple way to create either frontend- or backend-validated forms.
 
+Take a look at the examples to find out how to create the form of your desire.
+
 ```jsx
 <Form>
     <MyInput name="email"
