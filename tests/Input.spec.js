@@ -45,7 +45,7 @@ describe('Input', () => {
         wrapper.setProps({validations: {isRequired: true}});
         expect(instance.isRequired()).toBe(true);
 
-        wrapper.instance().onBlur();
+        wrapper.instance().touch();
         wrapper.update();
         expect(instance.isPristine()).toBe(false);
     });
