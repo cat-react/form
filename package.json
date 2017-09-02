@@ -10,7 +10,7 @@
         "test": "./node_modules/.bin/jest",
         "lint": "./node_modules/.bin/eslint src/**/*",
         "examples": "./node_modules/.bin/webpack-dev-server --config examples/webpack.config.js --content-base examples --open --hot",
-        "build_examples": "./node_modules/.bin/webpack --config examples/webpack.config.js && cp examples/index.html examples/build/ && ./node_modules/.bin/replace-in-file //build//g \"\" examples/build/index.html --isRegex"
+        "build_examples": "./node_modules/.bin/webpack --config examples/webpack.config.js && cp examples/favicon.ico examples/build/ && cp examples/index.html examples/build/ && ./node_modules/.bin/replace-in-file //build//g \"\" examples/build/index.html --isRegex"
     },
     "dependencies": {
         "auto-bind": "^1.1.0",
