@@ -110,6 +110,10 @@ export default class Form extends React.Component {
     }
 
     validate() {
+        if (!this.initialized) {
+            return;
+        }
+
         for (let input of this.inputs) {
             this.addToValidationQueue(input);
         }
