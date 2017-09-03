@@ -25,10 +25,10 @@ export default class Form extends React.Component {
     getChildContext() {
         return {
             _reactForm: {
-                enableTouchedOnChange: this.props.enableTouchedOnChange,
                 attach: this.attachInput,
                 detach: this.detachInput,
-                validate: this.validateInput,
+                addToValidationQueue: this.addToValidationQueue,
+                startValidation: this.startValidation,
                 getValues: this.getValues
             }
         };
@@ -200,11 +200,7 @@ Form.propTypes = {
     onValidSubmit: PropTypes.func,
     onInvalidSubmit: PropTypes.func,
     onValid: PropTypes.func,
-    onInvalid: PropTypes.func,
-    enableTouchedOnChange: PropTypes.bool
-};
-Form.defaultProps = {
-    enableTouchedOnChange: false
+    onInvalid: PropTypes.func
 };
 Form.childContextTypes = {
     _reactForm: PropTypes.object

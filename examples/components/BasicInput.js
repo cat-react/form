@@ -26,7 +26,6 @@ export default class BasicInput extends React.Component {
             className += this.props.isValid() ? '' : ' error';
         }
 
-        // TODO: remove onBlur
         return (
             <div className="form-group">
                 <label htmlFor={this.props.name}>{this.props.label} {this.props.isRequired() ? '*' : null}</label>
@@ -37,7 +36,7 @@ export default class BasicInput extends React.Component {
                        placeholder={this.props.placeholder}
                        value={this.props.getValue()}
                        onChange={this.onChange.bind(this)}
-                       onBlur={this.props.onBlur} />
+                       onBlur={this.props.touch} />
                 {this.renderErrors()}
             </div>
         );

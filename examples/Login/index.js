@@ -27,6 +27,10 @@ export default class App extends React.Component {
         });
     }
 
+    onSubmit(values, valid) {
+        console.log(values, valid);
+    }
+
     onValidSubmit(values) {
         this.setState({
             values: values
@@ -37,6 +41,7 @@ export default class App extends React.Component {
         return (
             <Form onValid={this.onValid}
                   onInvalid={this.onInvalid}
+                  onSubmit={this.onSubmit}
                   onValidSubmit={this.onValidSubmit}>
                 <h1>Login</h1>
                 <BasicInput label="Email address"

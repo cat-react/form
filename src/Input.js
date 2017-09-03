@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
 import Form from './Form';
 
+const CHANGE_VALUE_TIMEOUT = 350;
+
 export default function (WrappedComponent) {
     class Input extends React.Component {
         constructor(props, context) {
             super(props, context);
 
+            this.changeValueTimer = null;
             this.dependencies = [];
             for (let dependency of props.dependencies) {
                 this.addDependency(dependency);
@@ -79,18 +82,15 @@ export default function (WrappedComponent) {
         }
 
         setValue(value) {
-            // TODO: check if needed, maybe instead just wait 500ms for validation (and cancel if value gets changed before)
-            const isTouchedOnChange = this.context._reactForm.enableTouchedOnChange;
-            if (isTouchedOnChange && this.isPristine()) {
-                this.setState({
-                    pristine: false
-                });
-            }
-
+            clearTimeout(this.changeValueTimer);
+            this.context._reactForm.addToValidationQueue(this);
             this.setState({
                 value: value
             }, () => {
-                this.context._reactForm.validate(this);
+                this.changeValueTimer = setTimeout(() => {
+                    this.touch();
+                    this.context._reactForm.startValidation();
+                }, CHANGE_VALUE_TIMEOUT);
             });
         }
 
@@ -160,7 +160,7 @@ export default function (WrappedComponent) {
                 getValue: this.getValue,
                 setValue: this.setValue,
                 getErrorMessages: this.getErrorMessages,
-                onBlur: this.touch,
+                touch: this.touch,
                 ...this.props
             };
 

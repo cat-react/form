@@ -12,7 +12,8 @@ let formContext = {
         _reactForm: {
             attach: jest.fn(),
             detach: jest.fn(),
-            validate: jest.fn(),
+            addToValidationQueue: jest.fn(),
+            startValidation: jest.fn(),
             getValues: function () {
                 return mockValues;
             }
@@ -50,12 +51,17 @@ describe('Input', () => {
         expect(instance.isPristine()).toBe(false);
     });
 
-    it('should change the value correctly', () => {
+    it('should change the value correctly', (done) => {
         let wrapper = shallow(<CustomInput name="email" value="myValue2"/>, formContext);
         wrapper.instance().setValue('myValue3');
         wrapper.update();
         expect(wrapper.instance().getValue()).toBe('myValue3');
-        expect(formContext.context._reactForm.validate).toBeCalledWith(wrapper.instance());
+        expect(formContext.context._reactForm.addToValidationQueue).toBeCalledWith(wrapper.instance());
+        expect(formContext.context._reactForm.startValidation).toHaveBeenCalledTimes(0);
+        setTimeout(function () {
+            expect(formContext.context._reactForm.startValidation).toHaveBeenCalledTimes(1);
+            done();
+        }, 400);
     });
 
     it('should unmount correctly', () => {
