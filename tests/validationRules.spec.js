@@ -75,4 +75,34 @@ describe('Validation Rules', () => {
             expect(valid).toBe(false);
         });
     });
+
+    describe('isEmail', () => {
+        it('should validate an correct email successfully', () => {
+            const valid = rules.isEmail(null, 'test@gmail.com');
+            expect(valid).toBe(true);
+        });
+        it('should invalidate an incorrect email', () => {
+            let valid = rules.isEmail(null, 'abc');
+            expect(valid).toBe(false);
+            valid = rules.isEmail(null, null);
+            expect(valid).toBe(false);
+            valid = rules.isEmail(null, 'abc@abc');
+            expect(valid).toBe(false);
+            valid = rules.isEmail(null, 'abc@abc.');
+            expect(valid).toBe(false);
+        });
+    });
+
+    describe('minLength', () => {
+        it('should validate the string successfully', () => {
+            let valid = rules.minLength(null, 'abcdef', 6);
+            expect(valid).toBe(true);
+            valid = rules.minLength(null, 'abcdef', 4);
+            expect(valid).toBe(true);
+        });
+        it('should invalidate the string', () => {
+            let valid = rules.minLength(null, 'abcde', 6);
+            expect(valid).toBe(false);
+        });
+    })
 });
