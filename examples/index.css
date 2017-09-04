@@ -17,3 +17,9 @@
 .errorText {
     color: darkred;
 }
+.warning {
+    border-color: orange !important;
+}
+.warningText {
+    color: orangered;
+}

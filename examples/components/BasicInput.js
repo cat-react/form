@@ -7,37 +7,52 @@ export default class BasicInput extends React.Component {
         this.props.setValue(event.target.value);
     }
 
-    renderErrors() {
-        let errorMessages = [];
+    getClassName() {
+        let className = 'form-control';
         if (!this.props.isPristine()) {
-            errorMessages = this.props.getErrorMessages();
+            if (this.props.isValid()) {
+                const isWarning = this.props.getMessages().length > 0;
+                if (isWarning) {
+                    className += ' warning';
+                }
+            } else {
+                className += ' error';
+            }
+        }
+        return className;
+    }
+
+    renderMessages() {
+        let messages = [];
+        if (!this.props.isPristine()) {
+            messages = this.props.getMessages();
         }
 
-        if (!errorMessages || errorMessages.length <= 0) {
+        if (!messages || messages.length <= 0) {
             return null;
         }
 
-        return <ul className="errorText">{errorMessages.map((message, i) => <li key={i}>{message}</li>)}</ul>;
+        let className = 'errorText';
+        if (this.props.isValid()) {
+            className = 'warningText';
+        }
+
+        return <ul className={className}>{messages.map((message, i) => <li key={i}>{message}</li>)}</ul>;
     }
 
     render() {
-        let className = 'form-control';
-        if (!this.props.isPristine()) {
-            className += this.props.isValid() ? '' : ' error';
-        }
-
         return (
             <div className="form-group">
                 <label htmlFor={this.props.name}>{this.props.label} {this.props.isRequired() ? '*' : null}</label>
                 <input type={this.props.type}
-                       className={className}
+                       className={this.getClassName()}
                        id={this.props.name}
                        aria-describedby={this.props.name}
                        placeholder={this.props.placeholder}
                        value={this.props.getValue()}
                        onChange={this.onChange.bind(this)}
-                       onBlur={this.props.touch} />
-                {this.renderErrors()}
+                       onBlur={this.props.touch}/>
+                {this.renderMessages()}
             </div>
         );
     }

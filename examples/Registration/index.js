@@ -3,7 +3,7 @@ import Form from '@cat-react/form/Form';
 import BasicInput from '../components/BasicInput';
 import autoBind from 'auto-bind';
 
-export default class App extends React.Component {
+export default class extends React.Component {
     constructor(props) {
         super(props);
 
@@ -57,7 +57,7 @@ export default class App extends React.Component {
                             type="email"
                             value=""
                             validations={{isRequired: true, isEmail: true}}
-                            validationErrors={{
+                            messages={{
                                 isRequired: 'You have to enter your email address.',
                                 isEmail: 'Please enter a valid email address.'
                             }}
@@ -67,7 +67,7 @@ export default class App extends React.Component {
                             type="email"
                             value=""
                             validations={{isRequired: true, equalsField: 'email'}}
-                            validationErrors={{
+                            messages={{
                                 isRequired: 'Confirm your email address.',
                                 equalsField: 'The email addresses are not matching each other.'
                             }}
@@ -77,10 +77,20 @@ export default class App extends React.Component {
                             type="text"
                             value=""
                             validations={{minLength: 3}}
-                            validationErrors={{
+                            messages={{
                                 minLength: 'Your First Name has to be minimum 3 characters long.'
                             }}
                             placeholder="Enter your First Name"/>
+                <BasicInput label="Last Name"
+                            name="last_name"
+                            type="text"
+                            value=""
+                            validations={{isRequired: true}}
+                            warnings={['isRequired']}
+                            messages={{
+                                isRequired: 'We appreciate you to submit your last name.'
+                            }}
+                            placeholder="Enter your Last Name"/>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </Form>
         );

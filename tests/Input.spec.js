@@ -41,7 +41,7 @@ describe('Input', () => {
         expect(instance.isPristine()).toBe(true);
         expect(instance.isValid()).toBe(false);
         expect(instance.getValue()).toBe('myValue');
-        expect(instance.getErrorMessages().length).toBe(0);
+        expect(instance.getMessages().length).toBe(0);
 
         wrapper.setProps({validations: {isRequired: true}});
         expect(instance.isRequired()).toBe(true);
@@ -110,20 +110,34 @@ describe('Input', () => {
                                            }}/>, formContext);
 
         await expect(wrapper.instance().validate()).resolves.toBe(false);
-        expect(wrapper.instance().getErrorMessages()).toEqual([]);
+        expect(wrapper.instance().getMessages()).toEqual([]);
     });
 
-    it('should invalidate the inputand show the error messages', async () => {
+    it('should invalidate the input and show the error messages', async () => {
         let wrapper = shallow(<CustomInput name="email" dependencies={['email2']}
                                            validations={{
                                                isRequired: true
                                            }}
-                                           validationErrors={{
+                                           messages={{
                                                isRequired: 'the input is required'
                                            }}/>, formContext);
 
         await expect(wrapper.instance().validate()).resolves.toBe(false);
-        expect(wrapper.instance().getErrorMessages()).toEqual(['the input is required']);
+        expect(wrapper.instance().getMessages()).toEqual(['the input is required']);
+    });
+
+    it('should validate the input but show the warning messages', async () => {
+        let wrapper = shallow(<CustomInput name="email" dependencies={['email2']}
+                                           validations={{
+                                               isRequired: true
+                                           }}
+                                           messages={{
+                                               isRequired: 'the input is required'
+                                           }}
+                                           warnings={['isRequired']}/>, formContext);
+
+        await expect(wrapper.instance().validate()).resolves.toBe(true);
+        expect(wrapper.instance().getMessages()).toEqual(['the input is required']);
     });
 
     it('should validate the input with a custom validator', async () => {
@@ -135,5 +149,7 @@ describe('Input', () => {
                                            }}/>, formContext);
 
         await expect(wrapper.instance().validate()).resolves.toBe(true);
+        wrapper.instance().setValue('asd');
+        await expect(wrapper.instance().validate()).resolves.toBe(false);
     });
 });

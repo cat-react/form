@@ -3,7 +3,7 @@ import Form from '@cat-react/form/Form';
 import BasicInput from '../components/BasicInput';
 import autoBind from 'auto-bind';
 
-export default class App extends React.Component {
+export default class extends React.Component {
     constructor(props) {
         super(props);
 
@@ -49,7 +49,7 @@ export default class App extends React.Component {
                             type="email"
                             value=""
                             validations={{isRequired: true, isEmail: true}}
-                            validationErrors={{
+                            messages={{
                                 isEmail: 'Enter a valid email address.'
                             }}
                             placeholder="Enter email"/>
@@ -58,7 +58,7 @@ export default class App extends React.Component {
                             type="password"
                             value=""
                             validations={{isRequired: true, minLength: 3}}
-                            validationErrors={{
+                            messages={{
                                 isRequired: 'Enter your password.',
                                 minLength: 'A password must contain minimum 3 characters.'
                             }}

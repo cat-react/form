@@ -20,7 +20,7 @@ export default function (WrappedComponent) {
                 value: props.value,
                 pristine: true,
                 valid: false,
-                errors: []
+                messages: []
             };
 
             autoBind(this);
@@ -74,7 +74,7 @@ export default function (WrappedComponent) {
         }
 
         isValid() {
-            return this.state.valid && this.state.errors.length < 1;
+            return this.state.valid;
         }
 
         getValue() {
@@ -94,8 +94,8 @@ export default function (WrappedComponent) {
             });
         }
 
-        getErrorMessages() {
-            return this.state.errors;
+        getMessages() {
+            return this.state.messages;
         }
 
         touch() {
@@ -113,7 +113,7 @@ export default function (WrappedComponent) {
         }
 
         async runValidationRules(resolve) {
-            let errors = [];
+            let messages = [];
 
             let allValid = true;
             for (let ruleName in this.props.validations) {
@@ -121,11 +121,14 @@ export default function (WrappedComponent) {
                 if (ruleConditions) { // only execute validations if the ruleConditions are valid
                     const valid = await this.runValidationRule(ruleName);
                     if (!valid) {
-                        allValid = false;
+                        const isWarning = this.props.warnings.indexOf(ruleName) > -1;
+                        if (!isWarning) {
+                            allValid = false;
+                        }
 
-                        if (this.props.validationErrors && this.props.validationErrors[ruleName]) {
+                        if (this.props.messages && this.props.messages[ruleName]) {
                             // TODO: add support for arguments, maybe even different errormessages per validator?
-                            errors.push(this.props.validationErrors[ruleName]);
+                            messages.push(this.props.messages[ruleName]);
                         }
                     }
                 }
@@ -133,7 +136,7 @@ export default function (WrappedComponent) {
 
             this.setState({
                 valid: allValid,
-                errors: errors
+                messages: messages
             }, () => {
                 resolve(allValid);
             });
@@ -159,7 +162,7 @@ export default function (WrappedComponent) {
                 isValid: this.isValid,
                 getValue: this.getValue,
                 setValue: this.setValue,
-                getErrorMessages: this.getErrorMessages,
+                getMessages: this.getMessages,
                 touch: this.touch,
                 ...this.props
             };
@@ -172,10 +175,12 @@ export default function (WrappedComponent) {
     Input.propTypes = {
         name: PropTypes.string.isRequired,
         validations: PropTypes.object,
-        validationErrors: PropTypes.object,
+        warnings: PropTypes.arrayOf(PropTypes.string),
+        messages: PropTypes.object,
         dependencies: PropTypes.arrayOf(PropTypes.string)
     };
     Input.defaultProps = {
+        warnings: [],
         dependencies: []
     };
     Input.contextTypes = {
