@@ -153,7 +153,7 @@ describe('Form', () => {
         let wrapper;
         let onValidCalled = false;
         let onInvalidated = false;
-        let onValid = function() {
+        let onValid = function () {
             onValidCalled = true;
             if (onInvalidated) {
                 done();
@@ -163,7 +163,7 @@ describe('Form', () => {
                 });
             }
         };
-        let onInvalid = function(values, validating) {
+        let onInvalid = function (values, validating) {
             if (!validating) {
                 onInvalidated = true;
                 expect(onValidCalled).toBe(true);
@@ -173,5 +173,20 @@ describe('Form', () => {
             }
         };
         wrapper = mount(<SpecialForm onValid={onValid} onInvalid={onInvalid}/>);
+    });
+
+    it('should reset the form correctly', () => {
+        let wrapper = mount(<Form>
+            <CustomInput name="email" value="abc"/>
+            <CustomInput name="email2" value="jmc"/>
+        </Form>);
+        wrapper.instance().inputs[0].setValue('test1');
+        wrapper.instance().inputs[1].setValue('test2');
+        wrapper.update();
+        expect(wrapper.instance().inputs[0].getValue()).toEqual('test1');
+        expect(wrapper.instance().inputs[1].getValue()).toEqual('test2');
+        wrapper.instance().reset();
+        expect(wrapper.instance().inputs[0].getValue()).toEqual('abc');
+        expect(wrapper.instance().inputs[1].getValue()).toEqual('jmc');
     });
 });

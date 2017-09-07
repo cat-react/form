@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import autoBind from 'auto-bind';
+import autoBind from 'react-autobind';
 import Form from './Form';
 
 const CHANGE_VALUE_TIMEOUT = 350;
@@ -81,14 +81,16 @@ export default function (WrappedComponent) {
             return this.state.value;
         }
 
-        setValue(value) {
+        setValue(value, suppressTouch) {
             clearTimeout(this.changeValueTimer);
             this.context._reactForm.addToValidationQueue(this);
             this.setState({
                 value: value
             }, () => {
                 this.changeValueTimer = setTimeout(() => {
-                    this.touch();
+                    if (!suppressTouch) {
+                        this.touch();
+                    }
                     this.context._reactForm.startValidation();
                 }, CHANGE_VALUE_TIMEOUT);
             });
@@ -150,9 +152,18 @@ export default function (WrappedComponent) {
                 valid = await Form.validationRules[ruleName](this.context._reactForm.getValues(), this.getValue(), ruleConditions);
             } else if (typeof ruleConditions === 'function') {
                 valid = await ruleConditions(this.context._reactForm.getValues(), this.getValue());
+            } else if (ruleConditions instanceof Array) {
+                valid = await ruleConditions[0](this.context._reactForm.getValues(), this.getValue(), ruleConditions[1]);
             }
 
             return valid;
+        }
+
+        reset() {
+            this.setValue(this.props.value, true);
+            this.setState({
+                pristine: true
+            });
         }
 
         render() {
@@ -173,6 +184,7 @@ export default function (WrappedComponent) {
         }
     }
     Input.propTypes = {
+        value: PropTypes.any,
         name: PropTypes.string.isRequired,
         validations: PropTypes.object,
         warnings: PropTypes.arrayOf(PropTypes.string),

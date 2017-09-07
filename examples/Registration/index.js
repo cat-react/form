@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from '@cat-react/form/Form';
 import BasicInput from '../components/BasicInput';
-import autoBind from 'auto-bind';
+import autoBind from 'react-autobind';
 
 export default class extends React.Component {
     constructor(props) {

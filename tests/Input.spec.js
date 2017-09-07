@@ -64,6 +64,15 @@ describe('Input', () => {
         }, 400);
     });
 
+    it('should reset the input correctly', () => {
+        let wrapper = shallow(<CustomInput name="email" value="myValue2"/>, formContext);
+        wrapper.instance().setValue('myValue3');
+        wrapper.update();
+        expect(wrapper.instance().getValue()).toBe('myValue3');
+        wrapper.instance().reset();
+        expect(wrapper.instance().getValue()).toBe('myValue2');
+    });
+
     it('should unmount correctly', () => {
         let wrapper = shallow(<CustomInput name="email" className="myInput"/>, formContext);
         const instance = wrapper.instance();
@@ -151,5 +160,16 @@ describe('Input', () => {
         await expect(wrapper.instance().validate()).resolves.toBe(true);
         wrapper.instance().setValue('asd');
         await expect(wrapper.instance().validate()).resolves.toBe(false);
+    });
+
+    it('should validate the input with a custom validator and condition', async () => {
+        let wrapper = shallow(<CustomInput name="email" dependencies={['email2']} value="itsMyValue"
+                                           validations={{
+                                               myValidator: [function (values, value, condition) {
+                                                   return value === "itsMyValue" && condition === "test";
+                                               }, "test"]
+                                           }}/>, formContext);
+
+        await expect(wrapper.instance().validate()).resolves.toBe(true);
     });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import autoBind from 'auto-bind';
+import autoBind from 'react-autobind';
 import validationRules from './validationRules';
 
 export default class Form extends React.Component {
@@ -18,6 +18,7 @@ export default class Form extends React.Component {
         this.inputs = [];
         this.valid = false;
         this.validationQueue = [];
+        this.validating = false;
 
         autoBind(this);
     }
@@ -77,7 +78,7 @@ export default class Form extends React.Component {
     }
 
     isValidating() {
-        return this.validationQueue.length > 0;
+        return this.validationQueue.length > 0 || this.validating;
     }
 
     isValid() {
@@ -135,12 +136,14 @@ export default class Form extends React.Component {
     }
 
     async startValidation() {
-        if (this.validationQueue.length > 0) {
+        if (this.validationQueue.length > 0 && !this.validating) {
+            this.validating = true;
             const nextInputName = this.validationQueue.splice(0, 1)[0];
             const nextInput = this.inputs.find((input) => input.hasName(nextInputName));
             if (nextInput) {
                 await nextInput.validate();
             }
+            this.validating = false;
             this.startValidation();
         } else {
             let allValid = !this.inputs.some((input) => !input.isValid());
@@ -179,6 +182,12 @@ export default class Form extends React.Component {
         }
 
         return values;
+    }
+
+    reset() {
+        for (let input of this.inputs) {
+            input.reset();
+        }
     }
 
     render() {
