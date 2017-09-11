@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import validationRules from './validationRules';
 
+const DETACH_INPUT_TIMEOUT = 200;
+
 export default class Form extends React.Component {
     static validationRules = Object.assign({}, validationRules);
 
@@ -19,6 +21,7 @@ export default class Form extends React.Component {
         this.valid = false;
         this.validationQueue = [];
         this.validating = false;
+        this.detachInputTimer = null;
 
         autoBind(this);
     }
@@ -47,9 +50,7 @@ export default class Form extends React.Component {
     onSubmit(event) {
         event.preventDefault();
 
-        for (let input of this.inputs) {
-            input.touch();
-        }
+        this.touch();
 
         const valid = this.isValid();
         if (this.props.onSubmit) {
@@ -98,8 +99,9 @@ export default class Form extends React.Component {
     }
 
     detachInput(input) {
+        clearTimeout(this.detachInputTimer);
         this.inputs.splice(this.inputs.indexOf(input), 1);
-        this.validate();
+        this.detachInputTimer = setTimeout(this.validate, DETACH_INPUT_TIMEOUT);
     }
 
     addToValidationQueue(input) {
@@ -187,6 +189,12 @@ export default class Form extends React.Component {
     reset() {
         for (let input of this.inputs) {
             input.reset();
+        }
+    }
+
+    touch() {
+        for (let input of this.inputs) {
+            input.touch();
         }
     }
 
