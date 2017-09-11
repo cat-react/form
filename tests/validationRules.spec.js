@@ -104,5 +104,30 @@ describe('Validation Rules', () => {
             let valid = rules.minLength(null, 'abcde', 6);
             expect(valid).toBe(false);
         });
-    })
+    });
+
+    describe('number', () => {
+        it('should validate a whole number successfully', () => {
+            let valid = rules.isNumber(null, '10');
+            expect(valid).toBe(true);
+        });
+        it('should validate a negative number successfully', () => {
+            let valid = rules.isNumber(null, '-50');
+            expect(valid).toBe(true);
+        });
+        it('should validate a decimal number successfully', () => {
+            let valid = rules.isNumber(null, '10.50');
+            expect(valid).toBe(true);
+        });
+        it('should invalidate the invalid number', () => {
+            let valid = rules.isNumber(null, '1A0');
+            expect(valid).toBe(false);
+            valid = rules.isNumber(null, '');
+            expect(valid).toBe(false);
+            valid = rules.isNumber(null, 'abcde');
+            expect(valid).toBe(false);
+            valid = rules.isNumber(null, '10.a1');
+            expect(valid).toBe(false);
+        });
+    });
 });

@@ -28,6 +28,9 @@ const rules = {
             }
         }
         return allValid;
+    },
+    isNumber: (values, value) => {
+        return rules.matchRegexp(values, value, /^-?\d+\.?\d*$/);
     }
 };
 // TODO: add more basic rules
