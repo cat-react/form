@@ -31,12 +31,12 @@ const rules = {
     },
     isNumber: (values, value) => {
         switch (typeof value) {
-        case 'string': 
-            return rules.matchRegexp(values, value, /^-?\d+\.?\d*$/);
-        case 'number': 
-            return true;
-        default: 
-            return false;
+            case 'string': 
+                return rules.matchRegexp(values, value, /^-?\d+\.?\d*$/);
+            case 'number': 
+                return true;
+            default: 
+                return false;
         }
     }
 };
