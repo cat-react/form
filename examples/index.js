@@ -8,6 +8,7 @@ import './index.css';
 import Home from './Home';
 import Login from './Login';
 import Registration from './Registration';
+import Live from './Live';
 
 const menuEntries = [
     {
@@ -26,6 +27,11 @@ const menuEntries = [
         path: '/registration',
         component: Registration,
         text: 'Registration'
+    },
+    {
+        path: '/live',
+        component: Live,
+        text: 'Try out!'
     }
 ];
 
