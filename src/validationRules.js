@@ -30,7 +30,11 @@ const rules = {
         return allValid;
     },
     isNumber: (values, value) => {
-        return rules.matchRegexp(values, value, /^-?\d+\.?\d*$/);
+        switch(typeof value){
+            case 'string': return rules.matchRegexp(values, value, /^-?\d+\.?\d*$/);
+            case 'number': return true;
+            default: return false;
+        }
     }
 };
 // TODO: add more basic rules

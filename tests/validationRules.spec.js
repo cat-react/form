@@ -107,19 +107,19 @@ describe('Validation Rules', () => {
     });
 
     describe('number', () => {
-        it('should validate a whole number successfully', () => {
+        it('should validate a whole number strings successfully', () => {
             let valid = rules.isNumber(null, '10');
             expect(valid).toBe(true);
         });
-        it('should validate a negative number successfully', () => {
+        it('should validate a negative number strings successfully', () => {
             let valid = rules.isNumber(null, '-50');
             expect(valid).toBe(true);
         });
-        it('should validate a decimal number successfully', () => {
+        it('should validate a decimal number strings successfully', () => {
             let valid = rules.isNumber(null, '10.50');
             expect(valid).toBe(true);
         });
-        it('should invalidate the invalid number', () => {
+        it('should invalidate the invalid number strings', () => {
             let valid = rules.isNumber(null, '1A0');
             expect(valid).toBe(false);
             valid = rules.isNumber(null, '');
@@ -127,6 +127,32 @@ describe('Validation Rules', () => {
             valid = rules.isNumber(null, 'abcde');
             expect(valid).toBe(false);
             valid = rules.isNumber(null, '10.a1');
+            expect(valid).toBe(false);
+        });
+        it('should validate a whole number successfully', () => {
+            let valid = rules.isNumber(null, 10);
+            expect(valid).toBe(true);
+        });
+        it('should validate a negative number successfully', () => {
+            let valid = rules.isNumber(null, -50);
+            expect(valid).toBe(true);
+        });
+        it('should validate a decimal number successfully', () => {
+            let valid = rules.isNumber(null, 10.50);
+            expect(valid).toBe(true);
+        });
+        it('should invalidate the invalid numbers', () => {
+            let valid = rules.isNumber(null, {});
+            expect(valid).toBe(false);
+            valid = rules.isNumber(null, '');
+            expect(valid).toBe(false);
+            valid = rules.isNumber(null, null);
+            expect(valid).toBe(false);
+            valid = rules.isNumber(null, undefined);
+            expect(valid).toBe(false);
+            valid = rules.isNumber(null, true);
+            expect(valid).toBe(false);
+            valid = rules.isNumber(null, () => {});
             expect(valid).toBe(false);
         });
     });
