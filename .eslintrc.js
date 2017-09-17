@@ -27,7 +27,7 @@ module.exports = {
         'dot-location': [ERROR, 'property'],
         'dot-notation': ERROR,
         'eqeqeq': [ERROR, 'allow-null'],
-        'indent': [ERROR, 4],
+        'indent': [ERROR, 4, {"SwitchCase": 1}],
         'jsx-quotes': [ERROR, 'prefer-double'],
         'keyword-spacing': [ERROR, {after: true, before: true}],
         'no-bitwise': OFF,
