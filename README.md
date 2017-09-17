@@ -1,5 +1,15 @@
-# [@cat-react](https://github.com/cat-react) / form ![Build Status](https://travis-ci.org/cat-react/form.svg?branch=master) [![codecov](https://codecov.io/gh/cat-react/form/branch/master/graph/badge.svg)](https://codecov.io/gh/cat-react/form)
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/4418879/30520764-b86d5cc6-9bb4-11e7-9313-ced40eb4e066.png" alt="cat-react" />
+</p>
+
+# [@cat-react](https://github.com/cat-react) / form ![Build Status](https://travis-ci.org/cat-react/form.svg?branch=master) [![codecov](https://codecov.io/gh/cat-react/form/branch/master/graph/badge.svg)](https://codecov.io/gh/cat-react/form) [![npm version](https://badge.fury.io/js/%40cat-react%2Fform.svg)](https://badge.fury.io/js/%40cat-react%2Fform)
 A simple yet powerful library which helps creating validated forms in react. This project is inspired by [formsy-react](https://github.com/christianalfoni/formsy-react).
+
+## Installation
+[![npm package](https://nodei.co/npm/@cat-react/form.png?compact=true)](https://www.npmjs.com/package/@cat-react/form)
+- Install the dependency `@cat-react/form` <br/>
+  (e.g. with `yarn add @cat-react/form` or `npm install @cat-react/form --save`)
+- Import the Components with `import {Form, Input} from '@cat-react/form';`
 
 ## Getting Started
 Are you looking for a simple way to create validated forms with React?
@@ -90,8 +100,6 @@ export default class BasicInput extends React.Component {
     }
 }
 ```
-
-## Installation
 
 ## Contribution
 The project requires at least the latest stable version of node and npm. You also need to have yarn installed globally.
