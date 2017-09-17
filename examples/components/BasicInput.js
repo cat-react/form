@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '@cat-react/form/Input'
+import Input from '@cat-react/form'
 
 @Input
 export default class BasicInput extends React.Component {
