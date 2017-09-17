@@ -168,11 +168,17 @@ export default class Form extends React.Component {
         if (this.props.onValid) {
             this.props.onValid(this.getValues());
         }
+        if (this.props.onValidChanged) {
+            this.props.onValidChanged(true, this.getValues());
+        }
     }
 
     onInvalid() {
         if (this.props.onInvalid) {
             this.props.onInvalid(this.getValues(), this.isValidating());
+        }
+        if (this.props.onValidChanged) {
+            this.props.onValidChanged(false, this.getValues(), this.isValidating());
         }
     }
 
@@ -216,6 +222,7 @@ Form.propTypes = {
     onSubmit: PropTypes.func,
     onValidSubmit: PropTypes.func,
     onInvalidSubmit: PropTypes.func,
+    onValidChanged: PropTypes.func,
     onValid: PropTypes.func,
     onInvalid: PropTypes.func
 };
