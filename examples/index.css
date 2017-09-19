@@ -23,3 +23,12 @@
 .warningText {
     color: orangered;
 }
+
+/* react-live styles */
+.prism-code {
+    height: 550px;
+}
+
+.react-live {
+    height: 560px;
+}
