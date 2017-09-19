@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from '@cat-react/form/Form';
+import {Form} from '@cat-react/form';
 import BasicInput from '../components/BasicInput';
 import autoBind from 'react-autobind';
 
