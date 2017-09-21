@@ -1,4 +1,39 @@
 import React from 'react';
+import Form from '@cat-react/form/Form';
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+import BasicInput from '../components/BasicInput';
+import autoBind from 'react-autobind';
+
+const example = `class Login extends React.Component {
+    render() {
+        return (
+            <Form>
+                <h1>Login Example</h1>
+                    <BasicInput label="Email address"
+                                name="email"
+                                type="email"
+                                value=""
+                                validations={{isRequired: true, isEmail: true}}
+                                messages={{
+                                    isEmail: 'Enter a valid email address.'
+                                }}
+                                placeholder="Enter email"/>
+                    <BasicInput label="Password"
+                                name="password"
+                                type="password"
+                                value=""
+                                validations={{isRequired: true, minLength: 3}}
+                                messages={{
+                                    isRequired: 'Enter your password.',
+                                    minLength: 'A password must contain minimum 3 characters.'
+                                }}
+                                placeholder="Enter password"/>
+                    <button type="submit" className="btn btn-primary">Login</button>
+            </Form>
+        );
+    };
+}
+`;
 
 export default class extends React.Component {
     render() {
@@ -12,6 +47,14 @@ export default class extends React.Component {
                 <p>
                     Use the navigation on the left side to take a closer look at each example.
                 </p>
+                <h3>Try the library live!</h3>
+                <LiveProvider code={example} scope={{Form: Form, BasicInput: BasicInput, autoBind: autoBind}}>
+                    <LiveEditor className="col-md-6"/>
+                    <div className="col-md-6">
+                        <LiveError className="alert alert-danger"/>
+                        <LivePreview/>
+                    </div>
+                </LiveProvider>
             </div>
         );
     }
