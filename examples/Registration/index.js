@@ -29,6 +29,12 @@ export default class extends React.Component {
         }
     }
 
+    reset() {
+        if (this.form) {
+            this.form.reset();
+        }
+    }
+
     render() {
         let success = null;
         if (this.state.success) {
@@ -48,7 +54,7 @@ export default class extends React.Component {
         }
 
         return (
-            <Form onSubmit={this.onSubmit}>
+            <Form onSubmit={this.onSubmit} ref={(form) => { this.form = form; }}>
                 <h1>Registration</h1>
                 {success}
                 {error}
@@ -92,6 +98,7 @@ export default class extends React.Component {
                             }}
                             placeholder="Enter your Last Name"/>
                 <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="button" className="btn btn-secondary" onClick={this.reset}>Reset</button>
             </Form>
         );
     };
