@@ -8,6 +8,7 @@ import './index.css';
 import Home from './Home';
 import Login from './Login';
 import Registration from './Registration';
+import CustomValidation from './CustomValidation';
 
 const menuEntries = [
     {
@@ -25,7 +26,14 @@ const menuEntries = [
     {
         path: '/registration',
         component: Registration,
-        text: 'Registration'
+        text: 'Registration',
+        description: ' (with Form reset)'
+    },
+    {
+        path: '/custom-validation',
+        component: CustomValidation,
+        text: 'Custom Validation',
+        description: ' (default touched)'
     }
 ];
 
