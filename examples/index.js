@@ -9,6 +9,7 @@ import Home from './Home';
 import Login from './Login';
 import Registration from './Registration';
 import CustomValidation from './CustomValidation';
+import AsyncValidation from './AsyncValidation';
 
 const menuEntries = [
     {
@@ -34,6 +35,12 @@ const menuEntries = [
         component: CustomValidation,
         text: 'Custom Validation',
         description: ' (default touched)'
+    },
+    {
+        path: '/async-validation',
+        component: AsyncValidation,
+        text: 'Async Validation',
+        description: ' (against REST API)'
     }
 ];
 
