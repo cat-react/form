@@ -10,7 +10,21 @@ Welcome to the `@cat-react/form` API documentation.
     - [onValid](#onvalid)
     - [onInvalid](#oninvalid)
 - [Input](#input) (HOC for building input fields)
-    - asd
+    - Retrieves
+        - [value](#value)
+        - [name](#name)
+        - [validations](#validations)
+        - [warnings](#warnings)
+        - [messages](#messages)
+        - [dependencies](#dependencies)
+    - Passes Down
+        - [isRequired](#isrequired)
+        - [isPristine](#ispristine)
+        - [isValid](#isvalid)
+        - [getValue](#getvalue)
+        - [setValue](#setvalue)
+        - [getMessages](#getmessages)
+        - [touch](#touch)
 - [Validation Rules](#validation-rules) (StandardSet shipping with `@cat-react/form`)
     - asd
 
@@ -33,6 +47,38 @@ Main Component for building a form.
 
 ## Input
 Higher-Order Component for building input fields.
+
+### Retrieves
+Props which should be passed down to the HOC.
+
+#### value
+
+#### name
+
+#### validations
+
+#### warnings
+
+#### messages
+
+#### dependencies
+
+### Passes Down
+Props which are passed down to your custom input which uses the HOC.
+
+#### isRequired
+
+#### isPristine
+
+#### isValid
+
+#### getValue
+
+#### setValue
+
+#### getMessages
+
+#### touch
 
 ## Validation Rules
 StandardSet of validation rules which ships with `@cat-react/form`.
