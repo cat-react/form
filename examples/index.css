@@ -4,6 +4,13 @@
 .sidebar a {
     color: #337ab7;
 }
+hr {
+    width: 100%;
+    border-top: 1px solid #cecece;
+}
+.logo {
+    text-align: right;
+}
 .main {
     padding: 10px 5px;
 }
