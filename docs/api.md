@@ -26,7 +26,15 @@ Welcome to the `@cat-react/form` API documentation.
         - [getMessages](#getmessages)
         - [touch](#touch)
 - [Validation Rules](#validation-rules) (StandardSet shipping with `@cat-react/form`)
-    - asd
+    - [matchRegexp](#matchregexp)
+    - [isRequired](#isrequired)
+    - [isEmail](#isemail)
+    - [minLength](#minlength)
+    - [maxLength](#maxlength)
+    - [equals](#equals)
+    - [equalsField](#equalsfield)
+    - [equalsFields](#equalsfields)
+    - [isNumber](#isnumber)
 
 ---
 
@@ -82,3 +90,21 @@ Props which are passed down to your custom input which uses the HOC.
 
 ## Validation Rules
 StandardSet of validation rules which ships with `@cat-react/form`.
+
+### matchRegexp
+
+### isRequired
+
+### isEmail
+
+### minLength
+
+### maxLength
+
+### equals
+
+### equalsField
+
+### equalsFields
+
+### isNumber
