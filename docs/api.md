@@ -90,6 +90,19 @@ Method which is being called when a submit event is fired on the **valid** form.
     </tbody>
 </table>
 
+#### Example
+```jsx
+validSubmit(values) {
+    ...
+}
+
+render() {
+    <Form onValidSubmit={this.validSubmit}>    
+        ...
+    </Form>
+}
+```
+
 ### onInvalidSubmit(values)
 Method which is being called when a submit event is fired on the **invalid** form.
 
@@ -102,6 +115,19 @@ Method which is being called when a submit event is fired on the **invalid** for
         </tr>
     </tbody>
 </table>
+
+#### Example
+```jsx
+invalidSubmit(values) {
+    ...
+}
+
+render() {
+    <Form onInvalidSubmit={this.invalidSubmit}>    
+        ...
+    </Form>
+}
+```
 
 ### onValidChanged
 
