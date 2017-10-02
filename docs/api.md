@@ -45,7 +45,7 @@ Main Component for building a form.
 Method which is being called when a submit event is fired on the form, regardless of whether the form is valid or invalid.
 
 Params:<br/>
-**values**: All form values in form of a Map<fieldName, value>.
+**values**: All form values in form of a Map<fieldName, value>.<br/>
 **valid**: Boolean which indicates if the form is valid or invalid.
 
 ```jsx
