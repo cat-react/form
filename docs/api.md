@@ -546,37 +546,95 @@ render() {
 StandardSet of validation rules which ships with `@cat-react/form`.
 
 ### matchRegexp
+Field has to match the given regex.
 
+```jsx
+<BasicInput validations={{
+                matchRegexp: /ab*c/
+            }}/>
+```
 ---
 
 ### isRequired
+Field is required - the value must not be undefined, null, empty.
 
+```jsx
+<BasicInput validations={{
+                isRequired: true
+            }}/>
+```
 ---
 
 ### isEmail
+Field value has to be a valid email address.
 
+```jsx
+<BasicInput validations={{
+                isEmail: true
+            }}/>
+```
 ---
 
 ### minLength
+The minimum length of the value has to be the given param.
 
+```jsx
+<BasicInput validations={{
+                minLength: 3
+            }}/>
+```
 ---
 
 ### maxLength
+The maximum length of the value has to be the given param.
 
+```jsx
+<BasicInput validations={{
+                maxLength: 3
+            }}/>
+```
 ---
 
 ### equals
+The value has to equal the given param.
 
+```jsx
+<BasicInput validations={{
+                equals: 'test'
+            }}/>
+```
 ---
 
 ### equalsField
+The value has to equal the value of the field with the given name.
 
+**Creates dependencies.**
+
+```jsx
+<BasicInput validations={{
+                equalsField: 'password' // fieldName: password
+            }}/>
+```
 ---
 
 ### equalsFields
+The value has to equal the values of the fields with the given names.
 
+**Creates dependencies.**
+
+```jsx
+<BasicInput validations={{
+                equalsFields: ['password1', 'password2'] // fieldName: password1, password2
+            }}/>
+```
 ---
 
 ### isNumber
+The value has to be a number.
 
+```jsx
+<BasicInput validations={{
+                isNumber: true
+            }}/>
+```
 ---
