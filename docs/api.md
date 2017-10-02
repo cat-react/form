@@ -132,7 +132,47 @@ render() {
 ```
 ---
 
-### onValidChanged
+### onValidChanged(valid, values)
+Method which is being called when the form state changes. As an example you can use it to disable the submit button when the form is invalid.
+
+#### Params
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+          <td><b>valid</b></td>
+          <td>Boolean which indicates if the form is valid or invalid.</td>
+        </tr>
+        <tr>
+          <td><b>values</b></td>
+          <td>All form values in form of a Map<fieldName, value>.</td>
+        </tr>
+    </tbody>
+</table>
+
+#### Example
+```jsx
+constructor(props) {
+    super(props);
+    this.validChanged = this.validChanged.bind(this);
+    this.state = {
+        canSubmit: false
+    };
+}
+
+validChanged(valid) {
+    this.setState({
+        canSubmit: valid
+    });
+}
+
+render() {
+    <Form onValidChanged={this.validChanged}>    
+        ...
+        <button type="submit" disabled={!this.state.canSubmit}>Submit</button>
+    </Form>
+}
+```
+---
 
 ### onValid
 
