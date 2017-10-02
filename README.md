@@ -41,7 +41,7 @@ Take a look at the <a href="https://cat-react.github.io/form/">examples</a> to f
 Here you can see an example of an custom TextInput which shows how you can implement your own Inputs:
 ```jsx
 import React from 'react';
-import Input from '@cat-react/form/Input'
+import {Input} from '@cat-react/form'
 
 @Input
 export default class BasicInput extends React.Component {

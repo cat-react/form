@@ -41,6 +41,10 @@ Welcome to the `@cat-react/form` API documentation.
 ## Form
 Main Component for building a form.
 
+```js
+import {Form} from '@cat-react/form';
+```
+
 ### onSubmit(values, valid)
 Method which is being called when a submit event is fired on the form, regardless of whether the form is valid or invalid.
 
@@ -239,11 +243,43 @@ render() {
 ## Input
 Higher-Order Component for building input fields.
 
+Example BasicInput using the HOC with an decorator:
+```jsx
+import {Input} from '@cat-react/form';
+
+@Input
+class BasicInput extends React.Component {
+    constructor(props) {
+        this.onChange = this.onChange.bind(this);
+    }
+
+    onChange(event) {
+        this.props.setValue(event.target.value);
+    }
+
+    render() {
+        return (
+            <input type="text"
+                   value={this.props.getValue()}
+                   onChange={this.onChange}/>
+        );
+    }
+}
+```
+
+All validation rules run against the value of the HOC which is being set with the setValue prop.
+
 ### Retrieves
 Props which should be passed down to the HOC.
 
 #### value
 Value of the Input.
+
+Can also be used as a static default value. The HOC has its own state of the value (for validation purpose) which means you can let it take responsibility of it and retrieve it with the submit events.
+
+```jsx
+<BasicInput value="abc"/>
+```
 
 #### name
 Name of the Input. Must be unique, per form should only be one input field with a specific name.
