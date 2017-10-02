@@ -113,6 +113,15 @@ Two simple steps to get the things running on your local machine:
 
 You can run the examples with `yarn run examples` and the tests with `yarn test`.
 
+### How to build a release
+
+- update the `CHANGELOG.md` with all changes regarding the new release
+- update the release version in the `package.json`
+- push the changes
+- build the project locally with `npm run build`
+- `cd` into the `dist` folder and run `npm publish --access public`
+- draft a new release at `Github` with the contents of the `CHANGELOG.md` file
+
 ## License
 [MIT License](/LICENSE)
 
