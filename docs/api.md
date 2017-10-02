@@ -3,7 +3,7 @@ Welcome to the `@cat-react/form` API documentation.
 
 ## Table of Contents
 - [Form](#form) (Main Component)
-    - [addValidationRule](#addvalidationrule)
+    - [addValidationRule](#addvalidationrulename-func-createsdependencies)
     - [onSubmit](#onsubmitvalues-valid)
     - [onValidSubmit](#onvalidsubmitvalues)
     - [onInvalidSubmit](#oninvalidsubmitvalues)
@@ -46,10 +46,53 @@ Main Component for building a form.
 import {Form} from '@cat-react/form';
 ```
 
-### addValidationRule
+### addValidationRule(name, func, createsDependencies)
 A `static` method to add global validation rules.
 
-// TODO
+#### Params
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+          <td><b>name</b></td>
+          <td>Name of the validation rule.</td>
+        </tr>
+        <tr>
+          <td><b>func</b></td>
+          <td>Function containing the validation logic of the rule.</td>
+        </tr>
+        <tr>
+          <td><b>createsDependencies</b></td>
+          <td>Indicates if the rule should create dependencies to the fields which are passed as rule conditions.</td>
+        </tr>
+    </tbody>
+</table>
+
+#### Example
+```jsx
+import {Form} from '@cat-react/form';
+
+Form.addValidationRule('equalsUpperCase', (values, value, otherFieldName) {
+}, true);
+
+render() {
+    <Form ...>    
+        <BasicInput name="field1"
+                    value="a"
+                    .../>
+        <BasicInput name="field2"
+                    value="A" //valid
+                    validations={{
+                        equalsUpperCase: 'field1'
+                    }}/>
+        <BasicInput name="field2"
+                    value="a" //invalid
+                    validations={{
+                        equalsUpperCase: 'field1'
+                    }}/>
+    </Form>
+}
+```
+---
 
 ### onSubmit(values, valid)
 Method which is being called when a submit event is fired on the form, regardless of whether the form is valid or invalid.
