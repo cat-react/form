@@ -12,8 +12,8 @@ A simple yet powerful library which helps creating validated forms in react. Thi
 - Import the Components with `import {Form, Input} from '@cat-react/form';`
 
 ## Getting Started
-| [API Documentation](/docs/api.md) |
-|---|
+| [API Documentation](/docs/api.md) | [Examples](https://cat-react.github.io/form/) |
+|---|---|
 
 Are you looking for a simple way to create validated forms with React?
 
