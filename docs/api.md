@@ -3,6 +3,7 @@ Welcome to the `@cat-react/form` API documentation.
 
 ## Table of Contents
 - [Form](#form) (Main Component)
+    - [addValidationRule](#addvalidationrule)
     - [onSubmit](#onsubmitvalues-valid)
     - [onValidSubmit](#onvalidsubmitvalues)
     - [onInvalidSubmit](#oninvalidsubmitvalues)
@@ -44,6 +45,11 @@ Main Component for building a form.
 ```js
 import {Form} from '@cat-react/form';
 ```
+
+### addValidationRule
+A static method to add global validation rules.
+
+// TODO
 
 ### onSubmit(values, valid)
 Method which is being called when a submit event is fired on the form, regardless of whether the form is valid or invalid.
@@ -254,6 +260,7 @@ class BasicInput extends React.Component {
     }
 
     onChange(event) {
+        // setValue method passed down from the HOC, used to update its value
         this.props.setValue(event.target.value);
     }
 
@@ -279,13 +286,35 @@ Can also be used as a static default value. The HOC has its own state of the val
 
 ```jsx
 <BasicInput value="abc"/>
+<BasicInput value={10}/>
 ```
 
 #### name
 Name of the Input. Must be unique, per form should only be one input field with a specific name.
 
+```jsx
+<BasicInput name="field1"/>
+```
+
 #### validations
 The validations rules which have to succeed in order to successfully submit the form. (If they are not marked as a warning)
+
+You can either use global rules or custom inline rules.
+
+```jsx
+<BasicInput name="password"
+            validations={{
+                isRequired: true,
+                customRule: (values, value) => {
+                    return (value !== 'password');
+                }
+            }}/>
+<BasicInput name="confirm_password"
+            validations={{
+                isRequired: true,
+                equalsField: 'password'
+            }}/>
+```
 
 #### warnings
 The validation rules which should be treated as a warning only. (If they fail, the form is valid either)
