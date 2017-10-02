@@ -322,16 +322,50 @@ You can either use global rules or custom inline rules.
 #### warnings
 The validation rules which should be treated as a warning only. (If they fail, the form is valid either)
 
+```jsx
+<BasicInput name="confirm_password"
+            validations={{
+                isRequired: true,
+                equalsField: 'password'
+            }}
+            warnings={['isRequired']}/>
+```
 ---
 
 #### messages
 The (error-)messages of the validation rules which fail. Also being passed down for validationRules marked as a warning.
 
+```jsx
+<BasicInput name="password"
+            validations={{
+                isRequired: true,
+                customRule: (values, value) => {
+                    return (value !== 'password');
+                }
+            }}
+            messages={{
+                isRequired: 'You have to fill the password field.',
+                customRule: '"password" is not a valid password.'
+            }}/>
+```
 ---
 
 #### dependencies
-The manually added dependencies to other fields.
+The manually added dependencies to other fields. The field will also be revalidated when one the dependency-fields changes.
 
+Especially necessary if you use custom rules which create dependencies to other fields and do not autogenerate them.
+
+```jsx
+<BasicInput name="password" />
+<BasicInput name="confirm_password"
+            validations={{
+                isRequired: true,
+                equalsPassword: (values, value) => {
+                    return values.password === value;
+                }
+            }}
+            dependencies={['password']}/> // if password is being changed you want that confirm_password will also be revalidated
+```
 ---
 
 ### Passes Down
