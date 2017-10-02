@@ -366,9 +366,10 @@ Especially necessary if you use custom rules which create dependencies to other 
             }}
             dependencies={['password']}/> // if password is being changed you want that confirm_password will also be revalidated
 ```
----
 
-**Warning**: You don't have to define those for global rules like "equalsField". Those global rules create those dependencies automatically.
+**Warning**: You don't have to define such dependencies for global rules like "equalsField". Those global rules create the dependencies automatically.
+
+---
 
 ### Passes Down
 Props which are passed down to your custom input which uses the HOC. Additonally all props which are being passed to the HOC will also be passed down.
