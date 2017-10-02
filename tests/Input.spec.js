@@ -172,4 +172,28 @@ describe('Input', () => {
 
         await expect(wrapper.instance().validate()).resolves.toBe(true);
     });
+
+    it('should validate a non required value which is empty successfully', async () => {
+        let wrapper = shallow(<CustomInput name="field"
+                                           value=""
+                                           validations={{
+                                               myValidator: function (values, value) {
+                                                   return value === "itsMyValue";
+                                               }
+                                           }}/>, formContext);
+
+        await expect(wrapper.instance().validate()).resolves.toBe(true);
+    });
+
+    it('should invalidate a non required value which is not empty', async () => {
+        let wrapper = shallow(<CustomInput name="field"
+                                           value="itsMyValu"
+                                           validations={{
+                                               myValidator: function (values, value) {
+                                                   return value === "itsMyValue";
+                                               }
+                                           }}/>, formContext);
+
+        await expect(wrapper.instance().validate()).resolves.toBe(false);
+    });
 });
