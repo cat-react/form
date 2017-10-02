@@ -44,7 +44,7 @@ Main Component for building a form.
 ### onSubmit(values, valid)
 Method which is being called when a submit event is fired on the form, regardless of whether the form is valid or invalid.
 
-Params:
+#### Params
 <table class="table table-bordered table-striped">
     <tbody>
         <tr>
