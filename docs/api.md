@@ -377,6 +377,23 @@ Props which are passed down to your custom input which uses the HOC. Additonally
 #### isRequired
 Method which tells the wrapped component if the field is required.
 
+**Example**: you can use it to show a (*) sign for required fields beneath the label
+```jsx
+render() {
+    let requiredSign = '';
+    if (this.props.isRequired()) {
+        requiredSign = ' *';
+    }
+
+    return (
+        <div>
+            <label>Label{requiredSign}</label>
+            <input type="text" ... />
+        </div>
+    )
+}
+```
+
 ---
 
 #### isPristine
