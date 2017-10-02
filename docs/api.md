@@ -437,37 +437,109 @@ render() {
     )
 }
 ```
-
 ---
 
 #### isPristine
 Tells the wrapped component if the field is pristine. (wasn't touched yet)
 
+**Example**: only show messages if field is not pristine.
+```jsx
+renderMessages() {
+    let messages = [];
+    if (!this.props.isPristine()) {
+        messages = this.props.getMessages();
+    }
+
+    if (!messages || messages.length <= 0) {
+        return null;
+    }
+
+    return <ul>{messages.map((message, i) => <li key={i}>{message}</li>)}</ul>;
+}
+```
 ---
 
 #### isValid
 Tells the wrapped component if (the value of) the field is valid.
 
+**Example**: style messages differently if there are warnings
+```jsx
+renderMessages() {
+    let messages = this.props.getMessages();
+
+    if (!messages || messages.length <= 0) {
+        return null;
+    }
+
+    let className = 'errorText';
+    if (this.props.isValid()) {
+        className = 'warningText';
+    }
+
+    return <ul>{messages.map((message, i) => <li key={i}>{message}</li>)}</ul>;
+}
+```
 ---
 
 #### getValue
 Returns the current value of the field.
 
+```jsx
+render() {
+    return <input value={this.props.getValue()} ... />;
+}
+```
 ---
 
 #### setValue
 Sets the value of the field. Revalidation is being done afterwards.
 
+```jsx
+import {Input} from '@cat-react/form';
+
+@Input
+class BasicInput extends React.Component {
+    constructor(props) {
+        this.onChange = this.onChange.bind(this);
+    }
+
+    onChange(event) {
+        this.props.setValue(event.target.value);
+    }
+
+    render() {
+        return (
+            <input onChange={this.onChange} ... />
+        );
+    }
+}
+```
 ---
 
 #### getMessages
 Returns the error messages. If the field is valid, but also has messages, you can assume it's a warning, not an error.
 
+```jsx
+renderMessages() {
+    let messages = this.props.getMessages();
+
+    if (!messages || messages.length <= 0) {
+        return null;
+    }
+
+    return <ul>{messages.map((message, i) => <li key={i}>{message}</li>)}</ul>;
+}
+```
 ---
 
 #### touch
 Touches the component. Helpful if you want to show error messages only on touched input errors, just trigger it `onBlur`.
 
+```jsx
+render() {
+    return <input onBlur={this.props.touch} ... />;
+}
+```
 ---
 
 ## Validation Rules
