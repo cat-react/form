@@ -368,6 +368,8 @@ Especially necessary if you use custom rules which create dependencies to other 
 ```
 ---
 
+**Warning**: You don't have to define those for global rules like "equalsField". Those global rules create those dependencies automatically.
+
 ### Passes Down
 Props which are passed down to your custom input which uses the HOC. Additonally all props which are being passed to the HOC will also be passed down.
 
