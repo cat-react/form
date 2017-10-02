@@ -72,6 +72,7 @@ A `static` method to add global validation rules.
 import {Form} from '@cat-react/form';
 
 Form.addValidationRule('equalsUpperCase', (values, value, otherFieldName) {
+    return values[otherFieldName].toUpperCase() === value;
 }, true);
 
 render() {
