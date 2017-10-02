@@ -76,6 +76,7 @@ render() {
     </Form>
 }
 ```
+---
 
 ### onValidSubmit(values)
 Method which is being called when a submit event is fired on the **valid** form.
@@ -102,6 +103,7 @@ render() {
     </Form>
 }
 ```
+---
 
 ### onInvalidSubmit(values)
 Method which is being called when a submit event is fired on the **invalid** form.
@@ -128,6 +130,7 @@ render() {
     </Form>
 }
 ```
+---
 
 ### onValidChanged
 
