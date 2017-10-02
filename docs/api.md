@@ -47,7 +47,7 @@ import {Form} from '@cat-react/form';
 ```
 
 ### addValidationRule
-A static method to add global validation rules.
+A `static` method to add global validation rules.
 
 // TODO
 
@@ -367,7 +367,7 @@ Especially necessary if you use custom rules which create dependencies to other 
             dependencies={['password']}/> // if password is being changed you want that confirm_password will also be revalidated
 ```
 
-**Warning**: You don't have to define such dependencies for global rules like "equalsField". Those global rules create the dependencies automatically.
+**Warning**: You don't have to define such dependencies for global rules like `equalsField`. Those global rules create the dependencies automatically.
 
 ---
 
@@ -375,30 +375,37 @@ Especially necessary if you use custom rules which create dependencies to other 
 Props which are passed down to your custom input which uses the HOC. Additonally all props which are being passed to the HOC will also be passed down.
 
 #### isRequired
+Method which tells the wrapped component if the field is required.
 
 ---
 
 #### isPristine
+Tells the wrapped component if the field is pristine. (wasn't touched yet)
 
 ---
 
 #### isValid
+Tells the wrapped component if (the value of) the field is valid.
 
 ---
 
 #### getValue
+Returns the current value of the field.
 
 ---
 
 #### setValue
+Sets the value of the field. Revalidation is being done afterwards.
 
 ---
 
 #### getMessages
+Returns the error messages. If the field is valid, but also has messages, you can assume it's a warning, not an error.
 
 ---
 
 #### touch
+Touches the component. Helpful if you want to show error messages only on touched input errors, just trigger it `onBlur`.
 
 ---
 
