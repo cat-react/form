@@ -58,6 +58,7 @@ Method which is being called when a submit event is fired on the form, regardles
     </tbody>
 </table>
 
+#### Example
 ```jsx
 submit(values, valid) {
     console.log(values); // { field1: "a", field2: "b" }
@@ -76,9 +77,31 @@ render() {
 }
 ```
 
-### onValidSubmit
+### onValidSubmit(values)
+Method which is being called when a submit event is fired on the **valid** form.
 
-### onInvalidSubmit
+#### Params
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+          <td><b>values</b></td>
+          <td>All form values in form of a Map<fieldName, value>.</td>
+        </tr>
+    </tbody>
+</table>
+
+### onInvalidSubmit(values)
+Method which is being called when a submit event is fired on the **invalid** form.
+
+#### Params
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+          <td><b>values</b></td>
+          <td>All form values in form of a Map<fieldName, value>.</td>
+        </tr>
+    </tbody>
+</table>
 
 ### onValidChanged
 
