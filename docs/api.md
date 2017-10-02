@@ -3,12 +3,12 @@ Welcome to the `@cat-react/form` API documentation.
 
 ## Table of Contents
 - [Form](#form) (Main Component)
-    - [onSubmit](#onsubmit)
-    - [onValidSubmit](#onvalidsubmit)
-    - [onInvalidSubmit](#oninvalidsubmit)
-    - [onValidChanged](#onvalidchanged)
-    - [onValid](#onvalid)
-    - [onInvalid](#oninvalid)
+    - [onSubmit](#onsubmitvalues-valid)
+    - [onValidSubmit](#onvalidsubmitvalues)
+    - [onInvalidSubmit](#oninvalidsubmitvalues)
+    - [onValidChanged](#onvalidchangedvalid-values-isvalidating)
+    - [onValid](#onvalidvalues)
+    - [onInvalid](#oninvalidvalues-isvalidating)
 - [Input](#input) (HOC for building input fields)
     - Retrieves
         - [value](#value)
