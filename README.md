@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/4418879/30520764-b86d5cc6-9bb4-11e7-9313-ced40eb4e066.png" alt="cat-react" />
+    <a href="https://github.com/cat-react"><img src="https://user-images.githubusercontent.com/4418879/30520764-b86d5cc6-9bb4-11e7-9313-ced40eb4e066.png" alt="cat-react" /></a>
 </p>
 
 # [@cat-react](https://github.com/cat-react) / form ![Build Status](https://travis-ci.org/cat-react/form.svg?branch=master) [![codecov](https://codecov.io/gh/cat-react/form/branch/master/graph/badge.svg)](https://codecov.io/gh/cat-react/form) [![npm version](https://badge.fury.io/js/%40cat-react%2Fform.svg)](https://badge.fury.io/js/%40cat-react%2Fform)
