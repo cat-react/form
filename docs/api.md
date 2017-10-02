@@ -41,7 +41,30 @@ Welcome to the `@cat-react/form` API documentation.
 ## Form
 Main Component for building a form.
 
-### onSubmit
+### onSubmit(values, valid)
+Method which is being called when a submit event is fired on the form, regardless of whether the form is valid or invalid.
+
+Params:<br/>
+**values**: All form values in form of a Map<fieldName, value>.
+**valid**: Boolean which indicates if the form is valid or invalid.
+
+```jsx
+submit(values, valid) {
+    console.log(values); // { field1: "a", field2: "b" }
+    console.log(valid); // true or false
+}
+
+render() {
+    <Form onSubmit={this.submit}>    
+        <BasicInput name="field1"
+                    value="a"
+                    .../>
+        <BasicInput name="field2"
+                    value="b"
+                    .../>
+    </Form>
+}
+```
 
 ### onValidSubmit
 
