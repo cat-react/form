@@ -12,9 +12,12 @@ A simple yet powerful library which helps creating validated forms in react. Thi
 - Import the Components with `import {Form, Input} from '@cat-react/form';`
 
 ## Getting Started
+| [API Documentation](/docs/api.md) | [Examples](https://cat-react.github.io/form/) |
+|---|---|
+
 Are you looking for a simple way to create validated forms with React?
 
-Congratulations! Your search is over, because **`@cat-react/form`** offers you a simple way to create either frontend- or backend-validated forms.
+Congratulations! Your search is over, because **`@cat-react/form`** offers you a simple way to create either frontend- or backend-validated forms. Validations can either be processed synchronous or asynchronous and the state of the form is being refreshed in real time.
 
 Take a look at the <a href="https://cat-react.github.io/form/">examples</a> to find out how to create the form of your desire.
 
@@ -41,7 +44,7 @@ Take a look at the <a href="https://cat-react.github.io/form/">examples</a> to f
 Here you can see an example of an custom TextInput which shows how you can implement your own Inputs:
 ```jsx
 import React from 'react';
-import Input from '@cat-react/form/Input'
+import {Input} from '@cat-react/form'
 
 @Input
 export default class BasicInput extends React.Component {

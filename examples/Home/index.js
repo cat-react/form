@@ -52,7 +52,7 @@ export default class extends React.Component {
                             </p>
                         </div>
                         <div className="logo col-md-3">
-                            <a href="https://github.com/cat-react"><img src="/logo.png" /></a>
+                            <a href="https://github.com/cat-react"><img style={{width:'250px'}} src="https://i.imgur.com/DlQLj9t.png" /></a>
                         </div>
                     </div>
                 </div>

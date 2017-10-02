@@ -118,19 +118,21 @@ export default function (WrappedComponent) {
             let messages = [];
 
             let allValid = true;
-            for (let ruleName in this.props.validations) {
-                const ruleConditions = this.props.validations[ruleName];
-                if (ruleConditions) { // only execute validations if the ruleConditions are valid
-                    const valid = await this.runValidationRule(ruleName);
-                    if (!valid) {
-                        const isWarning = this.props.warnings.indexOf(ruleName) > -1;
-                        if (!isWarning) {
-                            allValid = false;
-                        }
+            if (this.isRequired() || this.getValue()) {
+                for (let ruleName in this.props.validations) {
+                    const ruleConditions = this.props.validations[ruleName];
+                    if (ruleConditions) { // only execute validations if the ruleConditions are valid
+                        const valid = await this.runValidationRule(ruleName);
+                        if (!valid) {
+                            const isWarning = this.props.warnings.indexOf(ruleName) > -1;
+                            if (!isWarning) {
+                                allValid = false;
+                            }
 
-                        if (this.props.messages && this.props.messages[ruleName]) {
-                            // TODO: add support for arguments, maybe even different errormessages per validator?
-                            messages.push(this.props.messages[ruleName]);
+                            if (this.props.messages && this.props.messages[ruleName]) {
+                                // TODO: add support for arguments, maybe even different errormessages per validator?
+                                messages.push(this.props.messages[ruleName]);
+                            }
                         }
                     }
                 }
@@ -168,14 +170,14 @@ export default function (WrappedComponent) {
 
         render() {
             const props = {
+                ...this.props,
                 isRequired: this.isRequired,
                 isPristine: this.isPristine,
                 isValid: this.isValid,
                 getValue: this.getValue,
                 setValue: this.setValue,
                 getMessages: this.getMessages,
-                touch: this.touch,
-                ...this.props
+                touch: this.touch
             };
 
             return (
