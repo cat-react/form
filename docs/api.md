@@ -243,19 +243,25 @@ Higher-Order Component for building input fields.
 Props which should be passed down to the HOC.
 
 #### value
+Value of the Input.
 
 #### name
+Name of the Input. Must be unique, per form should only be one input field with a specific name.
 
 #### validations
+The validations rules which have to succeed in order to successfully submit the form. (If they are not marked as a warning)
 
 #### warnings
+The validation rules which should be treated as a warning only. (If they fail, the form is valid either)
 
 #### messages
+The (error-)messages of the validation rules which fail. Also being passed down for validationRules marked as a warning.
 
 #### dependencies
+The manually added dependencies to other fields.
 
 ### Passes Down
-Props which are passed down to your custom input which uses the HOC.
+Props which are passed down to your custom input which uses the HOC. Additonally all props which are being passed to the HOC will also be passed down.
 
 #### isRequired
 

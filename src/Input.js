@@ -168,14 +168,14 @@ export default function (WrappedComponent) {
 
         render() {
             const props = {
+                ...this.props,
                 isRequired: this.isRequired,
                 isPristine: this.isPristine,
                 isValid: this.isValid,
                 getValue: this.getValue,
                 setValue: this.setValue,
                 getMessages: this.getMessages,
-                touch: this.touch,
-                ...this.props
+                touch: this.touch
             };
 
             return (
