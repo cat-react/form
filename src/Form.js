@@ -169,7 +169,7 @@ export default class Form extends React.Component {
             this.props.onValid(this.getValues());
         }
         if (this.props.onValidChanged) {
-            this.props.onValidChanged(true, this.getValues());
+            this.props.onValidChanged(true, this.getValues(), false);
         }
     }
 

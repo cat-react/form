@@ -132,7 +132,7 @@ render() {
 ```
 ---
 
-### onValidChanged(valid, values)
+### onValidChanged(valid, values, isValidating)
 Method which is being called when the form state changes. As an example you can use it to disable the submit button when the form is invalid.
 
 #### Params
@@ -145,6 +145,10 @@ Method which is being called when the form state changes. As an example you can 
         <tr>
           <td><b>values</b></td>
           <td>All form values in form of a Map<fieldName, value>.</td>
+        </tr>
+        <tr>
+          <td><b>isValidating</b></td>
+          <td>Boolean which indicates if the form is validating or already finished with the validation. Always false if the state is valid.</td>
         </tr>
     </tbody>
 </table>
