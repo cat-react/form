@@ -288,6 +288,7 @@ Can also be used as a static default value. The HOC has its own state of the val
 <BasicInput value="abc"/>
 <BasicInput value={10}/>
 ```
+---
 
 #### name
 Name of the Input. Must be unique, per form should only be one input field with a specific name.
@@ -295,6 +296,7 @@ Name of the Input. Must be unique, per form should only be one input field with 
 ```jsx
 <BasicInput name="field1"/>
 ```
+---
 
 #### validations
 The validations rules which have to succeed in order to successfully submit the form. (If they are not marked as a warning)
@@ -315,50 +317,89 @@ You can either use global rules or custom inline rules.
                 equalsField: 'password'
             }}/>
 ```
+---
 
 #### warnings
 The validation rules which should be treated as a warning only. (If they fail, the form is valid either)
 
+---
+
 #### messages
 The (error-)messages of the validation rules which fail. Also being passed down for validationRules marked as a warning.
 
+---
+
 #### dependencies
 The manually added dependencies to other fields.
+
+---
 
 ### Passes Down
 Props which are passed down to your custom input which uses the HOC. Additonally all props which are being passed to the HOC will also be passed down.
 
 #### isRequired
 
+---
+
 #### isPristine
+
+---
 
 #### isValid
 
+---
+
 #### getValue
+
+---
 
 #### setValue
 
+---
+
 #### getMessages
 
+---
+
 #### touch
+
+---
 
 ## Validation Rules
 StandardSet of validation rules which ships with `@cat-react/form`.
 
 ### matchRegexp
 
+---
+
 ### isRequired
+
+---
 
 ### isEmail
 
+---
+
 ### minLength
+
+---
 
 ### maxLength
 
+---
+
 ### equals
+
+---
 
 ### equalsField
 
+---
+
 ### equalsFields
 
+---
+
 ### isNumber
+
+---
