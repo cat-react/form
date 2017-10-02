@@ -44,9 +44,25 @@ Main Component for building a form.
 ### onSubmit(values, valid)
 Method which is being called when a submit event is fired on the form, regardless of whether the form is valid or invalid.
 
-Params:<br/>
-**values**: All form values in form of a Map<fieldName, value>.<br/>
-**valid**: Boolean which indicates if the form is valid or invalid.
+Params:
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>name</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>**values**</td>
+          <td>All form values in form of a Map<fieldName, value>.</td>
+        </tr>
+        <tr>
+          <td>**valid**</td>
+          <td>Boolean which indicates if the form is valid or invalid.</td>
+        </tr>
+    </tbody>
+</table>
 
 ```jsx
 submit(values, valid) {
