@@ -49,7 +49,7 @@ Method which is being called when a submit event is fired on the form, regardles
     <tbody>
         <tr>
           <td><b>values</b></td>
-          <td>All form values in form of a Map<fieldName, value>.</td>
+          <td>All form values as a Map<fieldName, value>.</td>
         </tr>
         <tr>
           <td><b>valid</b></td>
@@ -86,7 +86,7 @@ Method which is being called when a submit event is fired on the **valid** form.
     <tbody>
         <tr>
           <td><b>values</b></td>
-          <td>All form values in form of a Map<fieldName, value>.</td>
+          <td>All form values as a Map<fieldName, value>.</td>
         </tr>
     </tbody>
 </table>
@@ -113,7 +113,7 @@ Method which is being called when a submit event is fired on the **invalid** for
     <tbody>
         <tr>
           <td><b>values</b></td>
-          <td>All form values in form of a Map<fieldName, value>.</td>
+          <td>All form values as a Map<fieldName, value>.</td>
         </tr>
     </tbody>
 </table>
@@ -144,7 +144,7 @@ Method which is being called when the form state changes. As an example you can 
         </tr>
         <tr>
           <td><b>values</b></td>
-          <td>All form values in form of a Map<fieldName, value>.</td>
+          <td>All form values as a Map<fieldName, value>.</td>
         </tr>
         <tr>
           <td><b>isValidating</b></td>
@@ -178,9 +178,63 @@ render() {
 ```
 ---
 
-### onValid
+### onValid(values)
+Method which is being called when the form state changes to valid.
 
-### onInvalid
+#### Params
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+          <td><b>values</b></td>
+          <td>All form values as a Map<fieldName, value>.</td>
+        </tr>
+    </tbody>
+</table>
+
+#### Example
+```jsx
+valid(values) {
+    ...
+}
+
+render() {
+    <Form onValid={this.valid}>    
+        ...
+    </Form>
+}
+```
+---
+
+### onInvalid(values, isValidating)
+Method which is being called when the form state changes to invalid.
+
+#### Params
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+          <td><b>values</b></td>
+          <td>All form values in as a Map<fieldName, value>.</td>
+        </tr>
+        <tr>
+          <td><b>isValidating</b></td>
+          <td>Boolean which indicates if the form is validating or already finished with the validation.</td>
+        </tr>
+    </tbody>
+</table>
+
+#### Example
+```jsx
+inValid(values, isValidating) {
+    ...
+}
+
+render() {
+    <Form onInvalid={this.inValid}>    
+        ...
+    </Form>
+}
+```
+---
 
 ## Input
 Higher-Order Component for building input fields.
