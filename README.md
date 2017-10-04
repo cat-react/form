@@ -125,4 +125,4 @@ You can run the examples with `yarn run examples` and the tests with `yarn test`
 ## License
 [MIT License](/LICENSE)
 
-Copyright (c) 2017 Catalysts GmbH
+Copyright (c) 2017 [Catalysts GmbH](https://www.catalysts.cc/)
