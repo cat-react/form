@@ -205,14 +205,10 @@ export default class Form extends React.Component {
     }
 
     render() {
-        const {children, className} = this.props;
-
-        const formProps = {
-            className
-        };
+        const {children, className, formProps} = this.props;
 
         return (
-            <form {...formProps} onSubmit={this.onSubmit}>
+            <form className={className} {...formProps} onSubmit={this.onSubmit}>
                 {children}
             </form>
         );

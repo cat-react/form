@@ -49,6 +49,9 @@ describe('Input', () => {
         wrapper.instance().touch();
         wrapper.update();
         expect(instance.isPristine()).toBe(false);
+        wrapper.instance().touch();
+        wrapper.update();
+        expect(instance.isPristine()).toBe(false);
     });
 
     it('should change the value correctly', (done) => {

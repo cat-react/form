@@ -35,9 +35,20 @@ class SpecialForm extends React.Component {
 
 describe('Form', () => {
     it('should render correctly', () => {
-        let wrapper = shallow(<Form className="myForm"><span className="abc">abc</span></Form>);
+        const onInvalid = jest.fn();
+        let wrapper = shallow(<Form className="myForm" onInvalid={onInvalid}><span className="abc">abc</span></Form>);
+        wrapper.instance().validate();
         expect(wrapper.contains(<span className="abc">abc</span>)).toBe(true);
         expect(wrapper.is('.myForm')).toBe(true);
+        expect(onInvalid).not.toHaveBeenCalled();
+    });
+
+    it('should pass all props', () => {
+        let wrapper = shallow(<Form className="myForm" formProps={{autocomplete: 'off', fantasy: true}}><span className="abc">abc</span></Form>);
+        const props = wrapper.props();
+        expect(props.autocomplete).toBe('off');
+        expect(props.className).toBe('myForm');
+        expect(props.fantasy).toBe(true);
     });
 
     it('should add the vaidationRule', () => {
@@ -58,12 +69,14 @@ describe('Form', () => {
         const onSubmit = jest.fn();
         const onValidSubmit = jest.fn();
         const onInvalidSubmit = jest.fn();
+        const onValidChanged = jest.fn();
         const onValid = jest.fn();
         const onInvalid = jest.fn();
         let wrapper = mount(<Form className="myForm"
                                   onSubmit={onSubmit}
                                   onValidSubmit={onValidSubmit}
                                   onInvalidSubmit={onInvalidSubmit}
+                                  onValidChanged={onValidChanged}
                                   onValid={onValid}
                                   onInvalid={onInvalid}>
             <button type="submit"/>
@@ -78,6 +91,9 @@ describe('Form', () => {
         expect(onInvalid).toHaveBeenCalledWith({}, false);
         expect(onValid).toHaveBeenCalledTimes(1);
         expect(onValid).toHaveBeenCalledWith({});
+        expect(onValidChanged.mock.calls.length).toBe(2);
+        expect(onValidChanged.mock.calls[0]).toEqual([false, {}, false]);
+        expect(onValidChanged.mock.calls[1]).toEqual([true, {}, false]);
     });
 
     it('should submit without triggering the events', () => {

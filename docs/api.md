@@ -10,6 +10,8 @@ Welcome to the `@cat-react/form` API documentation.
     - [onValidChanged](#onvalidchangedvalid-values-isvalidating)
     - [onValid](#onvalidvalues)
     - [onInvalid](#oninvalidvalues-isvalidating)
+    - [className](#classname)
+    - [formProps](#formprops)
 - [Input](#input) (HOC for building input fields)
     - Retrieves
         - [value](#value)
@@ -288,6 +290,38 @@ render() {
     </Form>
 }
 ```
+---
+
+### className
+CSS ClassName which will be passed directly to the <form> html element.
+
+For example:
+```jsx
+<Form className="test" />
+```
+
+will result in:
+
+```jsx
+<form class="test" />
+```
+
+---
+
+### formProps
+Props which will be passed directly to the <form> html element.
+
+For example:
+```jsx
+<Form formProps={{autocomplete: 'off'}} />
+```
+
+will result in:
+
+```jsx
+<form autocomplete="off" />
+```
+
 ---
 
 ## Input

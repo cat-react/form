@@ -3,7 +3,19 @@ import rules from '../src/validationRules';
 describe('Validation Rules', () => {
     describe('isRequired', () => {
         it('should successfully validate the value', () => {
-            const valid = rules.isRequired(null, 'abc');
+            let valid = rules.isRequired(null, 'abc');
+            expect(valid).toBe(true);
+            valid = rules.isRequired(null, true);
+            expect(valid).toBe(true);
+            valid = rules.isRequired(null, false);
+            expect(valid).toBe(true);
+            valid = rules.isRequired(null, 0);
+            expect(valid).toBe(true);
+            valid = rules.isRequired(null, '0');
+            expect(valid).toBe(true);
+            valid = rules.isRequired(null, {});
+            expect(valid).toBe(true);
+            valid = rules.isRequired(null, []);
             expect(valid).toBe(true);
         });
         it('should invalidate the value', () => {
