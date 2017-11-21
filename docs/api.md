@@ -11,7 +11,7 @@ Welcome to the `@cat-react/form` API documentation.
     - [onValid](#onvalidvalues)
     - [onInvalid](#oninvalidvalues-isvalidating)
     - [className](#classname)
-    - [formProps](#formprops)
+    - [autoComplete](#autocomplete)
 - [Input](#input) (HOC for building input fields)
     - Retrieves
         - [value](#value)
@@ -308,12 +308,12 @@ will result in:
 
 ---
 
-### formProps
-Props which will be passed directly to the <form> html element.
+### autoComplete
+AutoComplete prop which will be passed directly to the <form> html element.
 
 For example:
 ```jsx
-<Form formProps={{autocomplete: 'off'}} />
+<Form autoComplete="off" />
 ```
 
 will result in:

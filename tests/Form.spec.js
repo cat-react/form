@@ -43,12 +43,9 @@ describe('Form', () => {
         expect(onInvalid).not.toHaveBeenCalled();
     });
 
-    it('should pass all props', () => {
-        let wrapper = shallow(<Form className="myForm" formProps={{autocomplete: 'off', fantasy: true}}><span className="abc">abc</span></Form>);
-        const props = wrapper.props();
-        expect(props.autocomplete).toBe('off');
-        expect(props.className).toBe('myForm');
-        expect(props.fantasy).toBe(true);
+    it('should pass all props correctly', () => {
+        let wrapper = shallow(<Form className="myForm" autoComplete="off"><span className="abc">abc</span></Form>);
+        expect(wrapper.html()).toBe('<form class="myForm" autocomplete="off"><span class="abc">abc</span></form>');
     });
 
     it('should add the vaidationRule', () => {

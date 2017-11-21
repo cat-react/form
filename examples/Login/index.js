@@ -42,7 +42,8 @@ export default class extends React.Component {
             <Form onValid={this.onValid}
                   onInvalid={this.onInvalid}
                   onSubmit={this.onSubmit}
-                  onValidSubmit={this.onValidSubmit}>
+                  onValidSubmit={this.onValidSubmit}
+                  autoComplete="off">
                 <h1>Login</h1>
                 <BasicInput label="Email address"
                             name="email"

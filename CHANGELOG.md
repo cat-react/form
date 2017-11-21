@@ -1,5 +1,5 @@
 ### 0.1.1 (November 21, 2017)
-- added possibility to add props to form element via [formProps](https://github.com/cat-react/form/blob/master/docs/api.md#formprops) prop
+- now it is possible to add an [autoComplete](https://github.com/cat-react/form/blob/master/docs/api.md#autocomplete) prop to the form element
 - the validation rule `isRequired` now checks for `undefined`, `null` or an empty string. everything else is valid
 
 ### 0.1.0 (October 3, 2017)
