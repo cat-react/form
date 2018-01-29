@@ -8,6 +8,7 @@ const uglify = require('rollup-plugin-uglify');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const pkg = require('./package.json');
+const Visualizer = require('rollup-plugin-visualizer');
 
 const bundles = [
     {
@@ -41,6 +42,9 @@ for (const config of bundles) {
             babelrc: false,
             exclude: 'node_modules/**',
             runtimeHelpers: true
+        }),
+        Visualizer({
+            filename: './build_stats.html'
         })
     ];
     if (config.minify) {

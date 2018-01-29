@@ -16,7 +16,8 @@ let formContext = {
             startValidation: jest.fn(),
             getValues: function () {
                 return mockValues;
-            }
+            },
+            changeValueTimeout: 350
         }
     }
 };
@@ -55,6 +56,8 @@ describe('Input', () => {
     });
 
     it('should change the value correctly', (done) => {
+        formContext.context._reactForm.startValidation = jest.fn();
+
         let wrapper = shallow(<CustomInput name="email" value="myValue2"/>, formContext);
         wrapper.instance().setValue('myValue3');
         wrapper.update();
@@ -67,6 +70,17 @@ describe('Input', () => {
         }, 400);
     });
 
+    it('should validate immediately', () => {
+        formContext.context._reactForm.startValidation = jest.fn();
+
+        let wrapper = shallow(<CustomInput name="email" value="myValue2" changeValueTimeout={0}/>, formContext);
+        wrapper.instance().setValue('myValue3');
+        wrapper.update();
+        expect(wrapper.instance().getValue()).toBe('myValue3');
+        expect(formContext.context._reactForm.addToValidationQueue).toBeCalledWith(wrapper.instance());
+        expect(formContext.context._reactForm.startValidation).toHaveBeenCalledTimes(1);
+    });
+
     it('should reset the input correctly', () => {
         let wrapper = shallow(<CustomInput name="email" value="myValue2"/>, formContext);
         wrapper.instance().setValue('myValue3');
@@ -74,6 +88,8 @@ describe('Input', () => {
         expect(wrapper.instance().getValue()).toBe('myValue3');
         wrapper.instance().reset();
         expect(wrapper.instance().getValue()).toBe('myValue2');
+        wrapper.instance().reset('');
+        expect(wrapper.instance().getValue()).toBe('');
     });
 
     it('should unmount correctly', () => {

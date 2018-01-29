@@ -33,7 +33,8 @@ export default class Form extends React.Component {
                 detach: this.detachInput,
                 addToValidationQueue: this.addToValidationQueue,
                 startValidation: this.startValidation,
-                getValues: this.getValues
+                getValues: this.getValues,
+                changeValueTimeout: this.props.changeValueTimeout
             }
         };
     }
@@ -225,7 +226,11 @@ Form.propTypes = {
     onInvalidSubmit: PropTypes.func,
     onValidChanged: PropTypes.func,
     onValid: PropTypes.func,
-    onInvalid: PropTypes.func
+    onInvalid: PropTypes.func,
+    changeValueTimeout: PropTypes.number
+};
+Form.defaultProps = {
+    changeValueTimeout: 350
 };
 Form.childContextTypes = {
     _reactForm: PropTypes.object

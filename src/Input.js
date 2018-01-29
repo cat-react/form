@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import Form from './Form';
 
-const CHANGE_VALUE_TIMEOUT = 350;
-
 export default function (WrappedComponent) {
     class Input extends React.Component {
         constructor(props, context) {
@@ -87,12 +85,23 @@ export default function (WrappedComponent) {
             this.setState({
                 value: value
             }, () => {
-                this.changeValueTimer = setTimeout(() => {
+                const startValidation = () => {
                     if (!suppressTouch) {
                         this.touch();
                     }
                     this.context._reactForm.startValidation();
-                }, CHANGE_VALUE_TIMEOUT);
+                };
+
+                let timeout = this.props.changeValueTimeout;
+                if (timeout !== 0 && !timeout) {
+                    timeout = this.context._reactForm.changeValueTimeout;
+                }
+
+                if (timeout > 0) {
+                    this.changeValueTimer = setTimeout(startValidation, timeout);
+                } else {
+                    startValidation();
+                }
             });
         }
 
@@ -161,8 +170,12 @@ export default function (WrappedComponent) {
             return valid;
         }
 
-        reset() {
-            this.setValue(this.props.value, true);
+        reset(value) {
+            if (value || value === '' || value === null) {
+                this.setValue(value, true);
+            } else {
+                this.setValue(this.props.value, true);
+            }
             this.setState({
                 pristine: true
             });
@@ -191,7 +204,8 @@ export default function (WrappedComponent) {
         validations: PropTypes.object,
         warnings: PropTypes.arrayOf(PropTypes.string),
         messages: PropTypes.object,
-        dependencies: PropTypes.arrayOf(PropTypes.string)
+        dependencies: PropTypes.arrayOf(PropTypes.string),
+        changeValueTimeout: PropTypes.number
     };
     Input.defaultProps = {
         warnings: [],

@@ -8,3 +8,4 @@ yarn-debug.log*
 yarn-error.log*
 .DS_Store
 examples/build/
+build_stats.html
