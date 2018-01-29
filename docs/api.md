@@ -22,7 +22,7 @@ Welcome to the `@cat-react/form` API documentation.
         - [warnings](#warnings)
         - [messages](#messages)
         - [dependencies](#dependencies)
-        - [changeValueTimeout](#changevaluetimeout)
+        - [changeValueTimeout](#changevaluetimeout-1)
     - Passes Down
         - [isRequired](#isrequired)
         - [isPristine](#ispristine)
@@ -332,7 +332,7 @@ Specifies the timeout after which an input validations starts in milliseconds. D
 This is useful so that the user doesn't get interrupted with validation messages while he is typing. 
 Also helpful for asynchronous validations because the server doesn't get polluted with requests on every keystroke.
 
-Can be overwritten with the [changeValueTimeout](#changevaluetimeout) prop on an Input.
+Can be overwritten with the [changeValueTimeout](#changevaluetimeout-1) prop on an Input.
 
 ### reset
 Resets all child inputs with their value prop. For more information go to the [Input reset section](#resetvalue).
