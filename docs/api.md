@@ -12,6 +12,8 @@ Welcome to the `@cat-react/form` API documentation.
     - [onInvalid](#oninvalidvalues-isvalidating)
     - [className](#classname)
     - [autoComplete](#autocomplete)
+    - [changeValueTimeout](#changevaluetimeout)
+    - [reset](#reset)
 - [Input](#input) (HOC for building input fields)
     - Retrieves
         - [value](#value)
@@ -20,6 +22,7 @@ Welcome to the `@cat-react/form` API documentation.
         - [warnings](#warnings)
         - [messages](#messages)
         - [dependencies](#dependencies)
+        - [changeValueTimeout](#changevaluetimeout)
     - Passes Down
         - [isRequired](#isrequired)
         - [isPristine](#ispristine)
@@ -28,6 +31,7 @@ Welcome to the `@cat-react/form` API documentation.
         - [setValue](#setvalue)
         - [getMessages](#getmessages)
         - [touch](#touch)
+    - [reset](#resetvalue)
 - [Validation Rules](#validation-rules) (StandardSet shipping with `@cat-react/form`)
     - [matchRegexp](#matchregexp)
     - [isRequired](#isrequired)
@@ -322,6 +326,26 @@ will result in:
 <form autocomplete="off" />
 ```
 
+### changeValueTimeout
+Specifies the timeout after which an input validations starts in milliseconds. Default is 350.
+
+This is useful so that the user doesn't get interrupted with validation messages while he is typing. 
+Also helpful for asynchronous validations because the server doesn't get polluted with requests on every keystroke.
+
+Can be overwritten with the [changeValueTimeout](#changevaluetimeout) prop on an Input.
+
+### reset
+Resets all child inputs with their value prop. For more information go to the [Input reset section](#resetvalue).
+
+```jsx
+render() {
+    <Form ref={(form) => this.form = form}>    
+        ...
+    </Form>
+    <button type="button" onClick={() => this.form.reset()}>Reset</button>
+}
+```
+
 ---
 
 ## Input
@@ -446,6 +470,13 @@ Especially necessary if you use custom rules which create dependencies to other 
 ```
 
 **Warning**: You don't have to define such dependencies for global rules like `equalsField`. Those global rules create the dependencies automatically.
+
+### changeValueTimeout
+Specifies the timeout after which an input validations starts in milliseconds.
+
+For more information take a look at the form [changeValueTimeout](#changevaluetimeout) prop.
+
+This prop can be used to overwrite the form prop for each input.
 
 ---
 
@@ -574,6 +605,20 @@ render() {
     return <input onBlur={this.props.touch} ... />;
 }
 ```
+
+### reset(value)
+Resets the input with the given value. If no value is provided, it will be resetted to the current "this.props.value" of the input.
+The input is pristine (untouched) after resetting.
+
+```jsx
+render() {
+    <Form>    
+        <BasicInput ref={(input) => this.input = input}/>
+    </Form>
+    <button type="button" onClick={() => this.input.reset('')}>Reset Input</button>
+}
+```
+
 ---
 
 ## Validation Rules
