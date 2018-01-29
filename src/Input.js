@@ -171,7 +171,7 @@ export default function (WrappedComponent) {
         }
 
         reset(value) {
-            if (value) {
+            if (value || value === '' || value === null) {
                 this.setValue(value, true);
             } else {
                 this.setValue(this.props.value, true);
