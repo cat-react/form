@@ -109,7 +109,7 @@ You need the _babel-plugin-transform-decorators_ plugin to use the ``@Input`` de
 If you don't want or cannot add this plugin to you webpack config you need to use the HOC as a
 function (like the ``connect()`` HOC of Redux).
 
-Example: ``export default input()(BasicInput)``
+Example: ``export default Input(BasicInput)``
 
 See the [Babel Documentation](https://babeljs.io/docs/plugins/transform-decorators/) for a detailed guide
 about how to add decorators to your application.
