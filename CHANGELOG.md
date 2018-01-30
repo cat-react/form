@@ -1,3 +1,8 @@
+### 0.1.2 (January 30, 2018)
+- added possibility to [reset an input](https://github.com/cat-react/form/blob/master/docs/api.md#resetvalue) with a specific value
+- added possibility to [reset the form](https://github.com/cat-react/form/blob/master/docs/api.md#reset) an provide values for each input
+- added possibility to [configure the timeout](https://github.com/cat-react/form/blob/master/docs/api.md#changevaluetimeout-1) before revalidating the form when changing an input
+
 ### 0.1.1 (November 21, 2017)
 - now it is possible to add an [autoComplete](https://github.com/cat-react/form/blob/master/docs/api.md#autocomplete) prop to the form element
 - the validation rule `isRequired` now checks for `undefined`, `null` or an empty string. everything else is valid

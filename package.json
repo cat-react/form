@@ -1,6 +1,6 @@
 {
     "name": "@cat-react/form",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "A simple yet powerful library which helps creating validated forms in react.",
     "main": "index.umd.min.js",
     "jsnext:main": "index.es.js",
