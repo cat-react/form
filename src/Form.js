@@ -193,9 +193,13 @@ export default class Form extends React.Component {
         return values;
     }
 
-    reset() {
+    reset(values) {
         for (let input of this.inputs) {
-            input.reset();
+            if (values && values[input.getName()]) {
+                input.reset(values[input.getName()]);
+            } else {
+                input.reset();
+            }
         }
     }
 
