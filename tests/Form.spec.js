@@ -201,5 +201,14 @@ describe('Form', () => {
         wrapper.instance().reset();
         expect(wrapper.instance().inputs[0].getValue()).toEqual('abc');
         expect(wrapper.instance().inputs[1].getValue()).toEqual('jmc');
+        wrapper.instance().reset({email:'val1'});
+        expect(wrapper.instance().inputs[0].getValue()).toEqual('val1');
+        expect(wrapper.instance().inputs[1].getValue()).toEqual('jmc');
+        wrapper.instance().reset({email2:'val2'});
+        expect(wrapper.instance().inputs[0].getValue()).toEqual('abc');
+        expect(wrapper.instance().inputs[1].getValue()).toEqual('val2');
+        wrapper.instance().reset({email:'val1',email2:'val2'});
+        expect(wrapper.instance().inputs[0].getValue()).toEqual('val1');
+        expect(wrapper.instance().inputs[1].getValue()).toEqual('val2');
     });
 });
