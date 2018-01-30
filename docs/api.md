@@ -346,6 +346,18 @@ render() {
 }
 ```
 
+It's also possible to pass a map with values for each input. Each Input will be resetting to the given value (or its prop value if none is provided).
+
+Example:
+```jsx
+render() {
+    <Form ref={(form) => this.form = form}>    
+        <BasicInput name="field1"/>
+    </Form>
+    <button type="button" onClick={() => this.form.reset({field1:'newvalue'})}>Reset</button>
+}
+```
+
 ---
 
 ## Input
